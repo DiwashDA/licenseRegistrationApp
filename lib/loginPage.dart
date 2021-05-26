@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tax_online/indexPage.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key key}) : super(key: key);
@@ -13,7 +14,7 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       appBar: AppBar(),
       body: Container(
-        color: Colors.orange,
+
         child: Padding(
           padding: const EdgeInsets.all(12.0),
           child: Column(
@@ -48,7 +49,7 @@ class _LoginPageState extends State<LoginPage> {
                   Expanded(
                     child: InkWell(
                       onTap: () {
-                        // Navigator.push(context, MaterialPageRoute(builder: (context)=>HomePage()));
+                         Navigator.push(context, MaterialPageRoute(builder: (context)=>IndexPage()));
                       },
                       child: Card(
                         shape: RoundedRectangleBorder(
@@ -74,13 +75,13 @@ class _LoginPageState extends State<LoginPage> {
                   InkWell(
                     onTap: () {},
                     child: Card(
-                      elevation: null,
-                      color: Colors.orange,
+                      elevation: 0.0,
+
                       child: Text(
                         'Need Help?',
                         style: TextStyle(
                             decoration: TextDecoration.underline,
-                            color: Colors.white),
+                            color: Colors.black),
                       ),
                     ),
                   ),
@@ -110,7 +111,7 @@ class _LoginPageState extends State<LoginPage> {
               // Navigator.push(context, MaterialPageRoute(builder: (context)=>SignUp()));
             },
             child: Text(
-              'Sign Up',
+              'Register',
               style: TextStyle(
                 fontSize: 15,
                 fontWeight: FontWeight.w500,
