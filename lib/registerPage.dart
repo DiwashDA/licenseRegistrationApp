@@ -271,6 +271,27 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
             ),
             Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextFormField(
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                      borderSide: BorderSide(color: Colors.orange),
+                    ),
+                    labelText: 'Confirm Password',
+                    prefixIcon: Icon(Icons.warning_amber_rounded)
+                ),
+                obscureText: true,
+                validator: (value) {
+                  if(value != confirmPass){
+                    return "Must be same as above ";
+                  }
+                  else
+                    return null;
+                },
+              ),
+            ),
+            Padding(
               padding: const EdgeInsets.all(12.0),
               child: Row(
                 children: [
@@ -288,7 +309,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           child: Text(
                             'Register',
                             style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.w500, color: Colors.orange),
+                                fontSize: 20, fontWeight: FontWeight.w500,),
                             textAlign: TextAlign.center,
                           ),
                         ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tax_online/newApplication.dart';
 class IndexPage extends StatefulWidget {
   const IndexPage({Key key}) : super(key: key);
 
@@ -25,7 +26,7 @@ class _IndexPageState extends State<IndexPage> {
                 Expanded(
                   child: InkWell(
                     onTap: () {
-                      // Navigator.push(context, MaterialPageRoute(builder: (context)=>IndexPage()));
+                       Navigator.push(context, MaterialPageRoute(builder: (context)=>NewApplication()));
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),

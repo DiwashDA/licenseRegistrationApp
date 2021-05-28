@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tax_online/indexPage.dart';
+import 'package:tax_online/registerPage.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key key}) : super(key: key);
@@ -19,9 +20,12 @@ class _LoginPageState extends State<LoginPage> {
           padding: const EdgeInsets.all(12.0),
           child: Column(
             children: [
-              SizedBox(
-                height: 15.0,
+
+              Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Image.asset('assets/home.jpg'),
               ),
+
               TextFormField(
                 decoration: InputDecoration(
                     border: OutlineInputBorder(
@@ -108,7 +112,7 @@ class _LoginPageState extends State<LoginPage> {
           ),
           InkWell(
             onTap: () {
-              // Navigator.push(context, MaterialPageRoute(builder: (context)=>SignUp()));
+               Navigator.push(context, MaterialPageRoute(builder: (context)=>RegisterPage()));
             },
             child: Text(
               'Register',
