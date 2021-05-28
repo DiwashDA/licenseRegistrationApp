@@ -313,6 +313,28 @@ class _NewApplicationState extends State<NewApplication> {
                     });
                   }),
             ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: InkWell(
+                      onTap: (){
+
+                      },
+                      child: Card(
+                        color: Colors.blue,
+                        child: Padding(
+                          padding: const EdgeInsets.all(12.0),
+                          child: Text("Submit", style: TextStyle(fontSize: 15.0, fontWeight: FontWeight.w500, color: Colors.black),textAlign: TextAlign.center,),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            )
           ],
         ),
       ),
