@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+
 class NewApplication extends StatefulWidget {
   const NewApplication({Key key}) : super(key: key);
 
@@ -17,8 +18,10 @@ class _NewApplicationState extends State<NewApplication> {
   TextEditingController dateController = TextEditingController();
 
   TextEditingController birthDate = TextEditingController();
+
   // String _chosenValue;
   DateTime _selectedDate;
+
   _selectDate() async {
     DateTime newSelectedDate = await showDatePicker(
       context: context,
@@ -33,13 +36,11 @@ class _NewApplicationState extends State<NewApplication> {
       birthDate
         ..text = DateFormat.yMMMd().format(_selectedDate)
         ..selection = TextSelection.fromPosition(TextPosition(
-            offset: birthDate.text.length,
-            affinity: TextAffinity.upstream));
-      setState(() {
-
-      });
+            offset: birthDate.text.length, affinity: TextAffinity.upstream));
+      setState(() {});
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,10 +61,9 @@ class _NewApplicationState extends State<NewApplication> {
                     color: Colors.black,
                   ),
                   labelText: 'Full Name',
-
                 ),
-                validator: (value){
-                  if(value.isEmpty){
+                validator: (value) {
+                  if (value.isEmpty) {
                     return "Name can't be empty";
                   }
                   return null;
@@ -76,17 +76,15 @@ class _NewApplicationState extends State<NewApplication> {
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8.0),
-
                   ),
                   prefixIcon: Icon(
                     Icons.wysiwyg_outlined,
                     color: Colors.black,
                   ),
                   labelText: 'Citizenship Number',
-
                 ),
-                validator: (value){
-                  if(value.isEmpty){
+                validator: (value) {
+                  if (value.isEmpty) {
                     return "Required";
                   }
                   return null;
@@ -107,10 +105,9 @@ class _NewApplicationState extends State<NewApplication> {
                     color: Colors.black,
                   ),
                   labelText: 'Address',
-
                 ),
-                validator: (value){
-                  if(value.isEmpty){
+                validator: (value) {
+                  if (value.isEmpty) {
                     return "Required";
                   }
                   return null;
@@ -140,49 +137,30 @@ class _NewApplicationState extends State<NewApplication> {
                   labelText: 'Date of Birth',
                   prefixIcon: Icon(Icons.calendar_today, color: Colors.black),
                   labelStyle:
-                  TextStyle(decorationStyle: TextDecorationStyle.solid),
+                      TextStyle(decorationStyle: TextDecorationStyle.solid),
                 ),
               ),
             ),
-            // Padding(
-            //   padding: const EdgeInsets.all(8.0),
-            //   child: TextFormField(
-            //     keyboardType: TextInputType.phone,
-            //     autocorrect: false,
-            //     controller: dateController,
-            //     onTap: () {
-            //       _selectDate();
-            //     },
-            //     validator: (value) {
-            //       if (value.isEmpty || value.length < 1) {
-            //         return 'Choose Date';
-            //       }
-            //       return null;
-            //     },
-            //     decoration: InputDecoration(
-            //         prefixIcon: Icon(Icons.calendar_today),
-            //         labelText: 'Date of Birth'
-            //     ),
-            //   ),
-            // ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: DropdownButtonFormField<String>(
-                  decoration:InputDecoration(
-                      prefixIcon: Icon(Icons.person_sharp)
-                  ) ,
+                  iconSize: 0.0,
+                  decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                          borderSide: BorderSide(
+                            width: 2.0,
+                          )),
+                      prefixIcon: Icon(
+                        Icons.person_sharp,
+                        color: Colors.black,
+                      )),
                   validator: (value) =>
-                  value == null ? 'Select your Gender' : null,
-
+                      value == null ? 'Select your Gender' : null,
                   isExpanded: true,
-                  // focusColor:Colors.white,
                   value: _newValue,
-                  //elevation: 5,
-                  // style: TextStyle(color: Colors.white),
-
-                  items: <String>[
-                    'Male','Female','Other'
-                  ].map<DropdownMenuItem<String>>((String value) {
+                  items: <String>['Male', 'Female', 'Other']
+                      .map<DropdownMenuItem<String>>((String value) {
                     return DropdownMenuItem<String>(
                       value: value,
                       child: Text(
@@ -200,7 +178,7 @@ class _NewApplicationState extends State<NewApplication> {
                   ),
                   onChanged: (String value) async {
                     setState(() {
-                      _newValue= value;
+                      _newValue = value;
                     });
                   }),
             ),
@@ -208,12 +186,17 @@ class _NewApplicationState extends State<NewApplication> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: DropdownButtonFormField<String>(
-                  decoration:InputDecoration(
-                      prefixIcon: Icon(Icons.location_on_outlined)
-                  ) ,
+                  iconSize: 0.0,
+                  decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                          borderSide: BorderSide(width: 2.0),
+                          borderRadius: BorderRadius.circular(10.0)),
+                      prefixIcon: Icon(
+                        Icons.location_on_outlined,
+                        color: Colors.black,
+                      )),
                   validator: (value) =>
-                  value == null ? 'Choose your Location' : null,
-
+                      value == null ? 'Choose your Location' : null,
                   isExpanded: true,
                   // focusColor:Colors.white,
                   value: _locationValue,
@@ -269,12 +252,17 @@ class _NewApplicationState extends State<NewApplication> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: DropdownButtonFormField<String>(
-                  decoration:InputDecoration(
-                      prefixIcon: Icon(Icons.widgets_outlined)
-                  ) ,
+                  iconSize: 0.0,
+                  decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                          borderSide: BorderSide(width: 2.0)),
+                      prefixIcon: Icon(
+                        Icons.widgets_outlined,
+                        color: Colors.black,
+                      )),
                   validator: (value) =>
-                  value == null ? 'Select Category' : null,
-
+                      value == null ? 'Select Category' : null,
                   isExpanded: true,
                   // focusColor:Colors.white,
                   value: _vehicleValue,
@@ -321,7 +309,7 @@ class _NewApplicationState extends State<NewApplication> {
                   ),
                   onChanged: (String value) async {
                     setState(() {
-                      _vehicleValue= value;
+                      _vehicleValue = value;
                     });
                   }),
             ),
