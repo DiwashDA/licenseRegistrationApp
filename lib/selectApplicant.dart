@@ -32,7 +32,9 @@ class _SelectApplicantState extends State<SelectApplicant> {
                 Icons.logout,
                 color: Colors.deepPurple,
               ),
-              onPressed: () {})
+              onPressed: () {
+                Navigator.pop(context);
+              })
         ],
         centerTitle: true,
         automaticallyImplyLeading: false,

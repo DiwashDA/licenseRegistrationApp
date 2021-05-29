@@ -70,7 +70,12 @@ class _RegisterPageState extends State<RegisterPage> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: DropdownButtonFormField<String>(
+                iconSize: 0.0,
                   decoration:InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                      borderSide: BorderSide(width: 2.0, color: Colors.black),
+                    ),
                     prefixIcon: Icon(Icons.location_on_outlined)
                   ) ,
                  validator: (value) =>
@@ -196,6 +201,10 @@ class _RegisterPageState extends State<RegisterPage> {
                   return null;
                 },
                 decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                    borderSide: BorderSide(width: 2.0, color: Colors.black)
+                  ),
                   prefixIcon: Icon(Icons.calendar_today),
                   labelText: 'Date of Birth'
                 ),
@@ -293,30 +302,24 @@ class _RegisterPageState extends State<RegisterPage> {
             ),
             Padding(
               padding: const EdgeInsets.all(12.0),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: InkWell(
-                      onTap: () {
-                        // Navigator.push(context, MaterialPageRoute(builder: (context)=>HomePage()));
-                      },
-                      child: Card(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8.0)),
-                        color: Colors.indigo,
-                        child: Padding(
-                          padding: const EdgeInsets.all(12.0),
-                          child: Text(
-                            'Register',
-                            style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.w500,),
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                      ),
+              child: InkWell(
+                onTap: () {
+                  // Navigator.push(context, MaterialPageRoute(builder: (context)=>HomePage()));
+                },
+                child: Card(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0)),
+                  color: Colors.indigo[100],
+                  child: Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Text(
+                      'Register',
+                      style: TextStyle(
+                          fontSize: 20, fontWeight: FontWeight.w500,),
+                      textAlign: TextAlign.center,
                     ),
                   ),
-                ],
+                ),
               ),
             ),
 

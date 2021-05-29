@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
+
 import 'package:tax_online/selectApplicant.dart';
+import 'package:tax_online/settingPage.dart';
 
 class IndexPage extends StatefulWidget {
   const IndexPage({Key key}) : super(key: key);
@@ -19,10 +21,7 @@ class _IndexPageState extends State<IndexPage> {
       'Index 1: Business',
       style: optionStyle,
     ),
-    Text(
-      'Index 2: School',
-      style: optionStyle,
-    ),
+    SettingPage(),
   ];
 
   void _onItemTapped(int index) {
@@ -47,8 +46,8 @@ class _IndexPageState extends State<IndexPage> {
             label: 'Business',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.school),
-            label: 'School',
+            icon: Icon(Icons.settings),
+            label: 'Settings',
           ),
         ],
         currentIndex: _selectedIndex,
