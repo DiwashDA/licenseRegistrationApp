@@ -10,88 +10,110 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+final _formKey=GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
       body: Container(
-
         child: Padding(
           padding: const EdgeInsets.all(12.0),
-          child: Column(
-            children: [
-
-              Padding(
+          child: Form(
+            key: _formKey,
+            child: ListView(
+              children: [
+                Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: Image.asset('assets/home.jpg'),
               ),
 
               TextFormField(
-                decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8.0),
-                        borderSide: BorderSide(color: Colors.orange)),
-                    prefixIcon: Icon(Icons.person),
-                    labelText: 'Username'),
-              ),
-              SizedBox(
-                height: 15.0,
-              ),
-              TextFormField(
-                decoration: InputDecoration(
+                    decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8.0),
+                            borderSide: BorderSide(color: Colors.orange)),
+                        prefixIcon: Icon(Icons.person),
+                        labelText: 'Username'),
+                    validator: (value) {
+                      if (value.isEmpty) {
+                        return 'Username Required';
+                      } else {
+                        return null;
+                      }
+                    },
+                  ),
+
+                SizedBox(
+                  height: 15.0,
+                ),
+                TextFormField(
+                  decoration: InputDecoration(
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8.0),
                         borderSide: BorderSide(color: Colors.orange)),
                     prefixIcon: Icon(Icons.lock_open),
-                    labelText: 'Password'),
-              ),
-              SizedBox(
-                height: 15.0,
-              ),
-              Row(
-                children: [
-                  Expanded(
-                    child: InkWell(
-                      onTap: () {
-                         Navigator.push(context, MaterialPageRoute(builder: (context)=>IndexPage()));
-                      },
+                    labelText: 'Password',
+                  ),
+                  obscureText: true,
+                  validator: (value) {
+                    if (value.isEmpty) {
+                      return "Required ";
+                    } else if (value.length < 6) {
+                      return "Password should be 6 characters long";
+                    } else {
+                      return null;
+                    }
+                  },
+                ),
+                SizedBox(
+                  height: 15.0,
+                ),
+                InkWell(
+                  onTap: () {
+                    if (_formKey.currentState.validate()) {
+                      Navigator.push(context, MaterialPageRoute(
+                          builder: (context) => IndexPage()));
+                    } else {
+                      print("Not Validated");
+                    }
+                  },
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8.0)),
+                    color: Colors.indigo,
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Text(
+                        'Log In',
+                        style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.orange),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    InkWell(
+                      onTap: () {},
                       child: Card(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8.0)),
-                        color: Colors.indigo,
-                        child: Padding(
-                          padding: const EdgeInsets.all(12.0),
-                          child: Text(
-                            'Log In',
-                            style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.w500, color: Colors.orange),
-                            textAlign: TextAlign.center,
-                          ),
+                        elevation: 0.0,
+                        child: Text(
+                          'Need Help?',
+                          style: TextStyle(
+                              decoration: TextDecoration.underline,
+                              color: Colors.black),
                         ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  InkWell(
-                    onTap: () {},
-                    child: Card(
-                      elevation: 0.0,
-
-                      child: Text(
-                        'Need Help?',
-                        style: TextStyle(
-                            decoration: TextDecoration.underline,
-                            color: Colors.black),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ],
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -112,7 +134,8 @@ class _LoginPageState extends State<LoginPage> {
           ),
           InkWell(
             onTap: () {
-               Navigator.push(context, MaterialPageRoute(builder: (context)=>RegisterPage()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => RegisterPage()));
             },
             child: Text(
               'Register',
