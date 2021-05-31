@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:my_app/submitPage.dart';
+import 'package:tax_online/loginPage.dart';
 
 void main() {
   runApp(MyApp());
@@ -12,9 +12,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'license online',
       theme: ThemeData(
-
         // This is the theme of your application.
         //
         // Try running your application with "flutter run". You'll see the
@@ -26,8 +25,9 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: SubmitPage(),
+      home: LoginPage(),
     );
   }
 }
+
 

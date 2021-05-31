@@ -1,5 +1,5 @@
-name: my_app
-description: A new Flutter application.
+name: tax_online
+description: A new Flutter project.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `pub publish`. This is preferred for private packages.
@@ -23,11 +23,13 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  intl: ^0.16.1
+  form_field_validator: ^1.0.1
 
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.0
+  cupertino_icons: ^1.0.2
 
 dev_dependencies:
   flutter_test:
@@ -44,10 +46,11 @@ flutter:
   # the material Icons class.
   uses-material-design: true
 
-  # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
+#   To add assets to your application, add an assets section, like this:
+  assets:
+    - assets/home.jpg
+    - assets/logo.png
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
