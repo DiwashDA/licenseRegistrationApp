@@ -1,5 +1,8 @@
+
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:image_picker/image_picker.dart';
 
 class NewApplication extends StatefulWidget {
   const NewApplication({Key key}) : super(key: key);
@@ -39,7 +42,9 @@ class _NewApplicationState extends State<NewApplication> {
             offset: birthDate.text.length, affinity: TextAffinity.upstream));
       setState(() {});
     }
+
   }
+  File imageFile;
 
   @override
   Widget build(BuildContext context) {
@@ -183,7 +188,42 @@ class _NewApplicationState extends State<NewApplication> {
                     });
                   }),
             ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                decoration: BoxDecoration(
+                 borderRadius: BorderRadius.circular(8.0),
+                  border: Border.all(color: Colors.grey)
 
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+
+                    children: [
+                      Icon(Icons.image),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text('Select Picture', style: TextStyle(fontSize: 16.0, color: Colors.grey),),
+                      ),
+                      Expanded(
+                        child: IconButton(
+                          iconSize: 30.0,
+                          icon: Icon(Icons.image_search),
+                          onPressed: _getFromGallery,
+                        ),
+                      ),
+                      IconButton(
+                        iconSize: 30.0,
+                        icon: Icon(Icons.camera_alt_outlined),
+                        onPressed: _getFromCamera,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+           
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: DropdownButtonFormField<String>(
@@ -333,5 +373,32 @@ class _NewApplicationState extends State<NewApplication> {
         ),
       ),
     );
+
+  }
+  _getFromGallery() async {
+    PickedFile pickedFile = await ImagePicker().getImage(
+      source: ImageSource.gallery,
+      maxWidth: 1800,
+      maxHeight: 1800,
+    );
+    if (pickedFile != null) {
+      setState(() {
+        imageFile = File(pickedFile.path);
+      });
+    }
+  }
+
+  /// Get from Camera
+  _getFromCamera() async {
+    PickedFile pickedFile = await ImagePicker().getImage(
+      source: ImageSource.camera,
+      maxWidth: 1800,
+      maxHeight: 1800,
+    );
+    if (pickedFile != null) {
+      setState(() {
+        imageFile = File(pickedFile.path);
+      });
+    }
   }
 }

@@ -1,4 +1,4 @@
-package com.example.tax_online
+package com.example.license_online
 
 import io.flutter.embedding.android.FlutterActivity
 

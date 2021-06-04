@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.tax_online">
+    package="com.example.license_online">
    <application
-        android:label="tax_online"
+        android:label="license_online"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

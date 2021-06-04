@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:tax_online/loginPage.dart';
-import 'package:tax_online/registerPage.dart';
+import 'package:license_online/loginPage.dart';
+import 'package:license_online/registerPage.dart';
+
 class Homepage extends StatefulWidget {
   const Homepage({Key key}) : super(key: key);
 

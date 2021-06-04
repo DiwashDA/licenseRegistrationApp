@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-
-
-import 'package:tax_online/selectApplicant.dart';
-import 'package:tax_online/settingPage.dart';
+import 'package:license_online/selectApplicant.dart';
+import 'package:license_online/settingPage.dart';
 
 class IndexPage extends StatefulWidget {
   const IndexPage({Key key}) : super(key: key);

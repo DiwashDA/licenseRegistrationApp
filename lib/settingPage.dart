@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'package:tax_online/changePassword.dart';
+import 'package:license_online/changePassword.dart';
 class SettingPage extends StatefulWidget {
   const SettingPage({Key key}) : super(key: key);
 
@@ -13,7 +13,9 @@ class _SettingPageState extends State<SettingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(),
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+        ),
     body: Container(
       child: ListView(
         children: [
