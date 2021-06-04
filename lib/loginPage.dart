@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:tax_online/indexPage.dart';
 import 'package:tax_online/registerPage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key key}) : super(key: key);
+  addBoolToSF() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool('boolValue', true);
+  }
 
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -150,5 +155,15 @@ String passValidator(String password){
     return "Password should not be greater than 15 characters";
   }else
     return null;
+}
+void navigateUser() async{
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  var status = prefs.getBool('boolValue') ?? false;
+  print(status);
+  if (status) {
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>IndexPage()));
+  } else {
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>LoginPage()));
+  }
 }
 }

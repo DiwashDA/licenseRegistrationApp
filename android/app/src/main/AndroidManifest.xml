@@ -1,8 +1,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.tax_online">
    <application
-        android:label="tax_online"
-        android:icon="@mipmap/ic_launcher">
+
+        android:label="license_online"
+        android:icon="@mipmap/ic_launcher"
+       android:requestLegacyExternalStorage="true">
+
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

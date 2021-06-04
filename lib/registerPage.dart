@@ -1,6 +1,8 @@
+
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key key}) : super(key: key);
@@ -35,6 +37,7 @@ class _RegisterPageState extends State<RegisterPage> {
             affinity: TextAffinity.upstream));
       setState(() {});
     }
+
   }
 
   @override
@@ -319,5 +322,6 @@ class _RegisterPageState extends State<RegisterPage> {
       return null;
     }
   }
+
   }
 
