@@ -46,26 +46,7 @@ class _RegisterPageState extends State<RegisterPage> {
           children: [
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: TextFormField(
-                decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                      borderSide: BorderSide(color: Colors.orange),
-                    ),
-                    prefixIcon: Icon(
-                      Icons.account_circle,
-                      color: Colors.black,
-                    ),
-                    labelText: 'Full Name',
-
-              ),
-                validator: (value){
-                  if(value.isEmpty){
-                    return "Name can't be empty";
-                  }
-                  return null;
-                },
-              ),
+              child: formField('Full Name', Icon(Icons.account_circle), false, validator),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
@@ -110,7 +91,8 @@ class _RegisterPageState extends State<RegisterPage> {
                    'Mahottari',
                    'Rautahat',
                    'Saptari',
-                   'Sarlahi' 'Siraha',
+                   'Sarlahi',
+                   'Siraha',
                    'Chitwan',
                    'Dhading',
                    'Dolakha',
@@ -212,93 +194,22 @@ class _RegisterPageState extends State<RegisterPage> {
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: TextFormField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8.0),
-                    borderSide: BorderSide(color: Colors.orange),
-                  ),
-                  labelText: 'Email',
-                  prefixIcon: Icon(Icons.email_sharp)
+              child: formField('Email', Icon(Icons.email_sharp), false, emailValidator)
 
-                ),
-                  validator: (value) {
-                    if (RegExp(
-                        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
-                        .hasMatch(value)) {
-                      return null;
-                    } else {
-                      return "Invalid Email !";
-                    }
-                  }
-              ),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: TextFormField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8.0),
-                    borderSide: BorderSide(color: Colors.orange),
-                  ),
-                  labelText: 'Contact',
-                  prefixIcon: Icon(Icons.phone_android)
-                ),
-                validator: (String value) {
-                  if (value.isEmpty) {
-                    return 'Phone number (+xxx xxx-xxxxxxx)';
-                  } else if (value.length>10 || value.length<10) {
-                    return 'Invalid Phone Number !';
-                  }else
-                    return null;
-                },
-              ),
+              child: formField('Contact', Icon(Icons.phone_android), false, contactValidator)
+
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: TextFormField(
-                decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                      borderSide: BorderSide(color: Colors.orange),
-                    ),
-                    labelText: 'Password',
-                    prefixIcon: Icon(Icons.warning_amber_rounded)
-                ),
-                obscureText: true,
-                validator: (value) {
-                  confirmPass=value;
-                  if(value.isEmpty){
-                    return "Required ";
-                  }else if(value.length<6) {
-                    return "Password should be 6 characters long";
-                  }else if(value.length>15) {
-                    return "Password shoud not be greater than 15 characters";
-                  }else
-                    return null;
-                },
-              ),
+              child: formField('Password', Icon(Icons.lock), true, passValidator)
+
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: TextFormField(
-                decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                      borderSide: BorderSide(color: Colors.orange),
-                    ),
-                    labelText: 'Confirm Password',
-                    prefixIcon: Icon(Icons.warning_amber_rounded)
-                ),
-                obscureText: true,
-                validator: (value) {
-                  if(value != confirmPass){
-                    return "Must be same as above ";
-                  }
-                  else
-                    return null;
-                },
-              ),
+              child: formField('Confirm Password', Icon(Icons.lock), true, confirmpassValidator)
             ),
             Padding(
               padding: const EdgeInsets.all(12.0),
@@ -322,8 +233,6 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
               ),
             ),
-
-
           ],
         ),
       ),
@@ -352,4 +261,63 @@ class _RegisterPageState extends State<RegisterPage> {
       ),
     );
   }
-}
+  Widget formField(String label,Widget icon,bool obs,String Function(String) validator){
+    return TextFormField(
+      decoration: InputDecoration(
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(8.0),
+            borderSide: BorderSide(color: Colors.orange),
+          ),
+          labelText: label,
+          prefixIcon: icon,
+      ),
+      obscureText: true,
+      validator: validator,
+    );
+  }
+  String validator(String vali){
+    if (vali!=null){
+      return null;
+    }
+    else{
+      return 'Password cannot be empty';
+    }
+  }
+  String emailValidator(String email){
+    if (RegExp(
+        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
+        .hasMatch(email)) {
+      return null;
+    } else {
+      return "Invalid Email !";
+    }
+  }
+  String contactValidator(String cont){
+    if (cont.isEmpty) {
+      return 'Phone number (+xxx xxx-xxxxxxx)';
+    } else if (cont.length>10 || cont.length<10) {
+      return 'Invalid Phone Number !';
+    }else
+      return null;
+  }
+  String passValidator(String password){
+    confirmPass=password;
+    if(password.isEmpty){
+      return "Required ";
+    }else if(password.length<6) {
+      return "Password should be 6 characters long";
+    }else if(password.length>15) {
+      return "Password should not be greater than 15 characters";
+    }else
+      return null;
+  }
+  String confirmpassValidator(String confirm){
+    if(confirmPass!=confirm){
+      return 'Must be same as above';
+    }
+    else{
+      return null;
+    }
+  }
+  }
+

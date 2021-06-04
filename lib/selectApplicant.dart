@@ -10,12 +10,7 @@ class SelectApplicant extends StatefulWidget {
 
 class _SelectApplicantState extends State<SelectApplicant> {
   List<Map> data = [
-    {
-      'name':
-          'Diwash Adhikari thiashkbhuinsbckjauishmkbnjkgbcui absuhgauihajkbscjkghuiahsbjkbhiuahydf',
-      'address': 'Kamalbinayak',
-      'Gender': 'Male'
-    },
+    {'name': 'Diwash Adhikari', 'address': 'Kamalbinayak', 'Gender': 'Male'},
     {'name': 'Diwash Adhikari', 'address': 'Kamalbinayak', 'Gender': 'Male'},
   ];
   TextStyle style = TextStyle(
@@ -161,7 +156,9 @@ class _SelectApplicantState extends State<SelectApplicant> {
                                 ],
                               ),
                             ),
-                            InkWell(onTap: () {}, child: Icon(Icons.more_vert)),
+                            InkWell(
+                                onTap: () {},
+                                child: Icon(Icons.more_vert)),
                           ],
                         ),
                       ),
