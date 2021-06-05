@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:license_online/infoPage.dart';
 import 'package:license_online/selectApplicant.dart';
 import 'package:license_online/settingPage.dart';
 
@@ -14,11 +15,8 @@ class _IndexPageState extends State<IndexPage> {
   static const TextStyle optionStyle =
   TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
+    InfoPage(),
     SelectApplicant(),
-    Text(
-      'Index 1: Business',
-      style: optionStyle,
-    ),
     SettingPage(),
   ];
 
@@ -36,12 +34,12 @@ class _IndexPageState extends State<IndexPage> {
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
+            icon: Icon(Icons.info_outline),
+            label: 'About',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.business),
-            label: 'Business',
+            icon: Icon(Icons.home),
+            label: 'Home',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),

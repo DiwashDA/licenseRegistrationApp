@@ -13,9 +13,26 @@ class _SettingPageState extends State<SettingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
+      appBar: AppBar(
+        actions: [
+          IconButton(
+              icon: Icon(
+                Icons.logout,
+                color: Colors.deepPurple,
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+              })
+        ],
+        centerTitle: true,
+        automaticallyImplyLeading: false,
+        backgroundColor: Colors.transparent,
+        elevation: 0.0,
+        title: Text(
+          'Settings',
+          style: TextStyle(color: Colors.deepPurple),
         ),
+      ),
     body: Container(
       child: ListView(
         children: [

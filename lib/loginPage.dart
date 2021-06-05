@@ -54,7 +54,7 @@ final _formKey=GlobalKey<FormState>();
                   child: Card(
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8.0)),
-                    color: Colors.indigo,
+                    color: Colors.lightBlueAccent,
                     child: Padding(
                       padding: const EdgeInsets.all(12.0),
                       child: Text(
@@ -62,29 +62,13 @@ final _formKey=GlobalKey<FormState>();
                         style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.w500,
-                            color: Colors.orange),
+                            color: Colors.purple),
                         textAlign: TextAlign.center,
                       ),
                     ),
                   ),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    InkWell(
-                      onTap: () {},
-                      child: Card(
-                        elevation: 0.0,
-                        child: Text(
-                          'Need Help?',
-                          style: TextStyle(
-                              decoration: TextDecoration.underline,
-                              color: Colors.black),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+
               ],
             ),
           ),
