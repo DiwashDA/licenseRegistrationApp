@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:license_online/api/service.dart';
 import 'package:license_online/indexPage.dart';
 import 'package:license_online/registerPage.dart';
 import 'package:license_online/utils.dart';
@@ -13,18 +15,16 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
+  TextEditingController email = TextEditingController();
+  TextEditingController password = TextEditingController();
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: [
-          Image.asset(
-            'assets/home.jpg',
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
-            fit: BoxFit.cover,
-          ),
+          Utils.bgImage(context),
           Container(
             color: Colors.black.withOpacity(0.5),
             child: Padding(
@@ -47,6 +47,7 @@ class _LoginPageState extends State<LoginPage> {
                       height: 20,
                     ),
                     Utils.formField(
+                      email,
                         'Email',
                         Icon(
                           Icons.email_outlined,
@@ -58,6 +59,7 @@ class _LoginPageState extends State<LoginPage> {
                       height: 15.0,
                     ),
                     Utils.formField(
+                      password,
                         'Password',
                         Icon(
                           Icons.lock_open_outlined,
@@ -69,9 +71,7 @@ class _LoginPageState extends State<LoginPage> {
                       height: 15.0,
                     ),
                     InkWell(
-                      onTap: (){
-                        Navigator.push(context, MaterialPageRoute(builder:(context)=>IndexPage()));
-                      },
+                      onTap: onLogin,
                       child: Card(
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8.0)),
@@ -100,5 +100,14 @@ class _LoginPageState extends State<LoginPage> {
         ],
       ),
     );
+  }
+  onLogin(){
+    Navigator.push(context, MaterialPageRoute(builder: (context)=>IndexPage()));
+    print("i am here");
+    var em= email.text;
+    var pw = password.text;
+    ApiService().login(em, pw).then((value) {
+      print(value);
+    });
   }
 }

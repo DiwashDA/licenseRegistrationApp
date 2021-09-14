@@ -1,10 +1,21 @@
 import 'package:flutter/material.dart';
 
 class Utils {
+  static Widget bgImage(context) {
+    return Image.asset(
+      'assets/home.jpg',
+      height: MediaQuery.of(context).size.height,
+      width: MediaQuery.of(context).size.width,
+      fit: BoxFit.cover,
+    );
+  }
+  static Color white = Colors.white;
+  static Color color = Colors.black.withOpacity(0.8);
 
-  static Widget formField(
-      String label, Widget icon, bool obs, String Function(String) validator) {
+  static Widget formField(TextEditingController controller, String label,
+      Widget icon, bool obs, String Function(String) validator) {
     return TextFormField(
+      controller: controller,
       decoration: InputDecoration(
         filled: true,
         fillColor: Colors.white.withOpacity(0.5),
