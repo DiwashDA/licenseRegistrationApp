@@ -13,7 +13,7 @@ class IndexPage extends StatefulWidget {
 class _IndexPageState extends State<IndexPage> {
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
-  TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
     InfoPage(),
     SelectApplicant(),
@@ -25,13 +25,22 @@ class _IndexPageState extends State<IndexPage> {
       _selectedIndex = index;
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBody: true,
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.black.withOpacity(0.7),
+        unselectedFontSize: 12,
+        selectedFontSize: 16,
+        unselectedIconTheme: IconThemeData(color: Colors.white),
+        selectedIconTheme: IconThemeData(color: Colors.yellow),
+        selectedLabelStyle: TextStyle(),
+        unselectedLabelStyle: TextStyle(),
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.info_outline),
@@ -49,7 +58,6 @@ class _IndexPageState extends State<IndexPage> {
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
       ),
-
     );
   }
 }
