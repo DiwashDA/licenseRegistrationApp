@@ -34,7 +34,7 @@ class _LoginPageState extends State<LoginPage> {
                 child: ListView(
                   children: [
                     SizedBox(
-                      height: 150,
+                      height: 130,
                     ),
                     ClipRRect(
                         borderRadius: BorderRadius.circular(20),
@@ -92,6 +92,17 @@ class _LoginPageState extends State<LoginPage> {
                     SizedBox(
                       height: 50,
                     ),
+                    Center(
+                      child: Text("Dont have an account?",style: TextStyle(fontWeight: FontWeight.w400,color: Utils.white
+                      ),),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    register(),
+                    SizedBox(
+                      height: 50,
+                    ),
                   ],
                 ),
               ),
@@ -109,5 +120,16 @@ class _LoginPageState extends State<LoginPage> {
     ApiService().login(em, pw).then((value) {
       print(value);
     });
+  }
+  Widget register(){
+    return Center(
+      child: InkWell(
+        onTap: (){
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>RegisterPage()));
+        },
+        child: Text("Sign Up Now",style: TextStyle(fontWeight: FontWeight.w600,color: Utils.white,fontSize: 20
+        ),),
+      ),
+    );
   }
 }
