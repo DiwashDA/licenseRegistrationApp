@@ -24,26 +24,7 @@ class _InfoPageState extends State<InfoPage> {
             color: Utils.color,
             child: ListView(
               children: [
-                AppBar(
-                  actions: [
-                    IconButton(
-                        icon: Icon(
-                          Icons.logout,
-                          color: Utils.white,
-                        ),
-                        onPressed: () {
-                          Navigator.pop(context);
-                        })
-                  ],
-                  centerTitle: true,
-                  automaticallyImplyLeading: false,
-                  backgroundColor: Colors.transparent,
-                  elevation: 0.0,
-                  title: Text(
-                    'About App',
-                    style: TextStyle(color: Utils.white),
-                  ),
-                ),
+                Utils.appBar('home', 'About App', context),
               ],
             ),
           ),

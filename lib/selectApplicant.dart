@@ -32,26 +32,7 @@ class _SelectApplicantState extends State<SelectApplicant> {
               child: ListView(
                 shrinkWrap: true,
                 children: [
-                  AppBar(
-                    actions: [
-                      IconButton(
-                          icon: Icon(
-                            Icons.logout,
-                            color: Utils.white,
-                          ),
-                          onPressed: () {
-                            Navigator.pop(context);
-                          })
-                    ],
-                    centerTitle: true,
-                    automaticallyImplyLeading: false,
-                    backgroundColor: Colors.transparent,
-                    elevation: 0.0,
-                    title: Text(
-                      'Select Applicant',
-                      style: TextStyle(color:Utils.white),
-                    ),
-                  ),
+                  Utils.appBar('home', 'Select Applicant', context),
                   ListView.builder(
                     shrinkWrap: true,
                       itemCount: data.length + 1,

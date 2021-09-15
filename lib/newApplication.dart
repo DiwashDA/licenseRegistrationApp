@@ -67,15 +67,7 @@ class _NewApplicationState extends State<NewApplication> {
             color: Utils.color,
             child: ListView(
               children: [
-                AppBar(
-
-                  leading: IconButton(onPressed: () {
-                    Navigator.pop(context);
-                  }, icon: Icon(Icons.arrow_back)),
-
-                  backgroundColor: Colors.transparent,
-                  elevation: 0.0,
-                ),
+                Utils.appBar('key', 'New Applicant', context),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Utils.formField(fullname, 'Full Name', Icon(Icons.account_circle), false, (p0) => null)

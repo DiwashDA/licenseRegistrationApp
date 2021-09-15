@@ -9,8 +9,29 @@ class Utils {
       fit: BoxFit.cover,
     );
   }
+  static Widget appBar(String key, String title, BuildContext context){
+    return AppBar(
+      title: Text(title),
+      leading: (key!="home")? IconButton(onPressed: () {
+        Navigator.pop(context);
+      }, icon: Icon(Icons.arrow_back)):Container(),
+      backgroundColor: Colors.transparent,
+      elevation: 0.0,
+      centerTitle: true,
+      actions: [
+        (key=="home")?  IconButton(
+            icon: Icon(
+              Icons.logout,
+              color: Utils.white,
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+            }):Container(),
+      ],
+    );
+  }
   static Color white = Colors.white;
-  static Color color = Colors.black.withOpacity(0.3);
+  static Color color = Colors.black.withOpacity(0.5);
 
   static Widget formField(TextEditingController controller, String label,
       Widget icon, bool obs, String Function(String) validator) {
@@ -29,7 +50,7 @@ class Utils {
           borderRadius: BorderRadius.circular(8.0),
         ),
         labelText: label,
-        labelStyle: TextStyle(color: Colors.black),
+        labelStyle: TextStyle(color: Colors.white),
         prefixIcon: icon,
       ),
       obscureText: obs,

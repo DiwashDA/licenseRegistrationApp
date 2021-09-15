@@ -23,26 +23,7 @@ class _SettingPageState extends State<SettingPage> {
           color: Utils.color,
           child: ListView(
             children: [
-              AppBar(
-                actions: [
-                  IconButton(
-                      icon: Icon(
-                        Icons.logout,
-                        color: Utils.white,
-                      ),
-                      onPressed: () {
-                        Navigator.pop(context);
-                      })
-                ],
-                centerTitle: true,
-                automaticallyImplyLeading: false,
-                backgroundColor: Colors.transparent,
-                elevation: 0.0,
-                title: Text(
-                  'Settings',
-                  style: TextStyle(color: Utils.white),
-                ),
-              ),
+              Utils.appBar('home', 'Settings', context),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: InkWell(
