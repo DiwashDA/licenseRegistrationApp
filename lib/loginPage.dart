@@ -93,7 +93,7 @@ class _LoginPageState extends State<LoginPage> {
                       height: 50,
                     ),
                     Center(
-                      child: Text("Dont have an account?",style: TextStyle(fontWeight: FontWeight.w400,color: Utils.white
+                      child: Text("Don't have an account?",style: TextStyle(fontWeight: FontWeight.w400,color: Utils.white
                       ),),
                     ),
                     SizedBox(
