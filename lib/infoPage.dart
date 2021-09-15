@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:license_online/utils.dart';
 
 class InfoPage extends StatefulWidget {
   const InfoPage({Key key}) : super(key: key);
@@ -20,6 +21,7 @@ class _InfoPageState extends State<InfoPage> {
             fit: BoxFit.cover,
           ),
           Container(
+            color: Utils.color,
             child: ListView(
               children: [
                 AppBar(
@@ -27,7 +29,7 @@ class _InfoPageState extends State<InfoPage> {
                     IconButton(
                         icon: Icon(
                           Icons.logout,
-                          color: Colors.deepPurple,
+                          color: Utils.white,
                         ),
                         onPressed: () {
                           Navigator.pop(context);
@@ -39,7 +41,7 @@ class _InfoPageState extends State<InfoPage> {
                   elevation: 0.0,
                   title: Text(
                     'About App',
-                    style: TextStyle(color: Colors.deepPurple),
+                    style: TextStyle(color: Utils.white),
                   ),
                 ),
               ],
