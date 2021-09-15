@@ -10,7 +10,7 @@ class Utils {
     );
   }
   static Color white = Colors.white;
-  static Color color = Colors.black.withOpacity(0.8);
+  static Color color = Colors.black.withOpacity(0.3);
 
   static Widget formField(TextEditingController controller, String label,
       Widget icon, bool obs, String Function(String) validator) {
@@ -18,7 +18,7 @@ class Utils {
       controller: controller,
       decoration: InputDecoration(
         filled: true,
-        fillColor: Colors.white.withOpacity(0.5),
+        fillColor: Colors.white.withOpacity(0.3),
         focusColor: Colors.black,
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(color: Colors.black, style: BorderStyle.solid),
