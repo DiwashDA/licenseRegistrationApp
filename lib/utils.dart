@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Utils {
   static Widget bgImage(context) {
@@ -8,6 +9,14 @@ class Utils {
       width: MediaQuery.of(context).size.width,
       fit: BoxFit.cover,
     );
+  }
+  static saveToken(value)async{
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    pref.setString("token", value['token']);
+  }
+  static Future getToken()async{
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    return await pref.getString("token");
   }
   static Widget appBar(String key, String title, BuildContext context){
     return AppBar(

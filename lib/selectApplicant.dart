@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:license_online/applicationdetails.dart';
 import 'package:license_online/newApplication.dart';
 import 'package:license_online/utils.dart';
 
@@ -66,93 +67,98 @@ class _SelectApplicantState extends State<SelectApplicant> {
                             ),
                           );
                         } else {
-                          return Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Card(
-                              color: Colors.grey[100],
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Expanded(
-                                      child: Column(
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.all(4.0),
-                                            child: Row(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              children: [
-                                                Icon(Icons.account_circle_outlined,
-                                                    color: Colors.grey),
-                                                SizedBox(
-                                                  width: 10.0,
-                                                ),
-                                                Expanded(
-                                                    child: Text(
-                                                  data[index]['name'],
-                                                  style: style,
-                                                  maxLines: 2,
-                                                  overflow: TextOverflow.ellipsis,
-                                                )),
-                                              ],
+                          return InkWell(
+                            onTap: (){
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=>Details()));
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Card(
+                                color: Colors.grey[100],
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                                  child: Row(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Expanded(
+                                        child: Column(
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsets.all(4.0),
+                                              child: Row(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                children: [
+                                                  Icon(Icons.account_circle_outlined,
+                                                      color: Colors.grey),
+                                                  SizedBox(
+                                                    width: 10.0,
+                                                  ),
+                                                  Expanded(
+                                                      child: Text(
+                                                    data[index]['name'],
+                                                    style: style,
+                                                    maxLines: 2,
+                                                    overflow: TextOverflow.ellipsis,
+                                                  )),
+                                                ],
+                                              ),
                                             ),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.all(4.0),
-                                            child: Row(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              children: [
-                                                Icon(
-                                                  Icons.location_on_outlined,
-                                                  color: Colors.grey,
-                                                ),
-                                                SizedBox(
-                                                  width: 10.0,
-                                                ),
-                                                Text(
-                                                  data[index]['address'],
-                                                  style: style,
-                                                ),
-                                              ],
+                                            Padding(
+                                              padding: const EdgeInsets.all(4.0),
+                                              child: Row(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                children: [
+                                                  Icon(
+                                                    Icons.location_on_outlined,
+                                                    color: Colors.grey,
+                                                  ),
+                                                  SizedBox(
+                                                    width: 10.0,
+                                                  ),
+                                                  Text(
+                                                    data[index]['address'],
+                                                    style: style,
+                                                  ),
+                                                ],
+                                              ),
                                             ),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.all(4.0),
-                                            child: Row(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              children: [
-                                                Icon(
-                                                  Icons.person,
-                                                  color: Colors.grey,
-                                                ),
-                                                SizedBox(
-                                                  width: 10.0,
-                                                ),
-                                                Text(
-                                                  data[index]['Gender'],
-                                                  style: style,
-                                                ),
-                                              ],
+                                            Padding(
+                                              padding: const EdgeInsets.all(4.0),
+                                              child: Row(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                children: [
+                                                  Icon(
+                                                    Icons.person,
+                                                    color: Colors.grey,
+                                                  ),
+                                                  SizedBox(
+                                                    width: 10.0,
+                                                  ),
+                                                  Text(
+                                                    data[index]['Gender'],
+                                                    style: style,
+                                                  ),
+                                                ],
+                                              ),
                                             ),
-                                          ),
-                                        ],
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                    InkWell(
-                                        onTap: () {},
-                                        child: Icon(Icons.more_vert)),
-                                  ],
+                                      InkWell(
+                                          onTap: () {},
+                                          child: Icon(Icons.more_vert)),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),

@@ -18,7 +18,6 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,7 +46,7 @@ class _LoginPageState extends State<LoginPage> {
                       height: 20,
                     ),
                     Utils.formField(
-                      email,
+                        email,
                         'Email',
                         Icon(
                           Icons.email_outlined,
@@ -59,7 +58,7 @@ class _LoginPageState extends State<LoginPage> {
                       height: 15.0,
                     ),
                     Utils.formField(
-                      password,
+                        password,
                         'Password',
                         Icon(
                           Icons.lock_open_outlined,
@@ -93,8 +92,11 @@ class _LoginPageState extends State<LoginPage> {
                       height: 50,
                     ),
                     Center(
-                      child: Text("Don't have an account?",style: TextStyle(fontWeight: FontWeight.w400,color: Utils.white
-                      ),),
+                      child: Text(
+                        "Don't have an account?",
+                        style: TextStyle(
+                            fontWeight: FontWeight.w400, color: Utils.white),
+                      ),
                     ),
                     SizedBox(
                       height: 10,
@@ -112,23 +114,38 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
-  onLogin(){
-    Navigator.push(context, MaterialPageRoute(builder: (context)=>IndexPage()));
+
+  onLogin() {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => IndexPage()));
     print("i am here");
-    var em= email.text;
+    var em = email.text;
     var pw = password.text;
     ApiService().login(em, pw).then((value) {
+      Utils.saveToken(value);
       print(value);
     });
   }
-  Widget register(){
+
+  afterLogin(value) async{
+
+  }
+
+  Widget register() {
     return Center(
       child: InkWell(
-        onTap: (){
-          Navigator.push(context, MaterialPageRoute(builder: (context)=>RegisterPage()));
+        onTap: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => RegisterPage()));
         },
-        child: Text("Sign Up Now",style: TextStyle(fontWeight: FontWeight.w600,color: Utils.white,fontSize: 20, decoration: TextDecoration.underline
-        ),),
+        child: Text(
+          "Sign Up Now",
+          style: TextStyle(
+              fontWeight: FontWeight.w600,
+              color: Utils.white,
+              fontSize: 20,
+              decoration: TextDecoration.underline),
+        ),
       ),
     );
   }

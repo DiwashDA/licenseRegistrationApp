@@ -189,7 +189,7 @@ class _NewApplicationState extends State<NewApplication> {
                     ),
                   ),
                 ),
-
+                imageFile==null?Container():ClipRRect(borderRadius: BorderRadius.circular(20),child: Container(height:300,child: Image.file(imageFile,))),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: DropdownButtonFormField<String>(
