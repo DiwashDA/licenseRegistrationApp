@@ -36,69 +36,14 @@ class _ChangePasswordState extends State<ChangePassword> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Utils.formField(oldpw, 'Old Password', Icon(Icons.lock_clock), true, (p0) => null)
-                    // TextFormField(
-                    //   decoration: InputDecoration(
-                    //     prefixIcon: Icon(Icons.lock_clock),
-                    //     border: OutlineInputBorder(
-                    //       borderRadius: BorderRadius.circular(8.0),
-                    //     ),
-                    //     labelText: 'Old Password'
-                    //   ),
-                    //   validator: (value){
-                    //     if(value.isEmpty){
-                    //       return 'Old password required';
-                    //     }
-                    //     else{
-                    //       return null;
-                    //     }
-                    //   },
-                    // ),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Utils.formField(newpw, 'New Password', Icon(Icons.lock_open_outlined), true, (p0) => null)
-                    // TextFormField(
-                    //   decoration: InputDecoration(
-                    //       prefixIcon: Icon(Icons.lock_open_outlined),
-                    //       border: OutlineInputBorder(
-                    //         borderRadius: BorderRadius.circular(8.0),
-                    //       ),
-                    //       labelText: 'New Password'
-                    //   ),
-                    //   validator: (value){
-                    //     confirmPass=value;
-                    //     if(value.isEmpty){
-                    //       return 'New password required';
-                    //     }
-                    //     else if(value.length<6){
-                    //       return 'Password must have at least 6 characters';
-                    //     }
-                    //     else{
-                    //       return null;
-                    //     }
-                    //   },
-                    // ),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Utils.formField(cnewpw, 'Confirm New Password', Icon(Icons.lock_open), true, (p0) => null)
-                    // TextFormField(
-                    //   decoration: InputDecoration(
-                    //       prefixIcon: Icon(Icons.lock_open),
-                    //       border: OutlineInputBorder(
-                    //         borderRadius: BorderRadius.circular(8.0),
-                    //       ),
-                    //       labelText: 'Confirm New Password'
-                    //   ),
-                    //   validator: (value){
-                    //     if(value!=confirmPass){
-                    //       return 'Must be same as above';
-                    //     }
-                    //     else{
-                    //       return null;
-                    //     }
-                    //   },
-                    // ),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(12.0),
@@ -114,7 +59,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                       child: Card(
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8.0)),
-                        color: Colors.blueAccent[100],
+                        color: Colors.green,
                         child: Padding(
                           padding: const EdgeInsets.all(12.0),
                           child: Text(
@@ -122,7 +67,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                             style: TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.w500,
-                                color: Colors.black),
+                                color: Colors.white),
                             textAlign: TextAlign.center,
                           ),
                         ),

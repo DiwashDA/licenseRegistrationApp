@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:license_online/loginPage.dart';
+import 'package:license_online/utils.dart';
 
 
 class RegisterPage extends StatefulWidget {
@@ -41,256 +42,255 @@ class _RegisterPageState extends State<RegisterPage> {
     }
 
   }
+  TextEditingController fullnames = TextEditingController();
+  TextEditingController addresses = TextEditingController();
+  TextEditingController dobs = TextEditingController();
+  TextEditingController emails = TextEditingController();
+  TextEditingController phones = TextEditingController();
+  TextEditingController passwords = TextEditingController();
+  TextEditingController cpasswords = TextEditingController();
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      body: Container(
-        child: Form(
-          key: _formKey,
-          child: ListView(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: formField('Full Name', Icon(Icons.account_circle), false, validator),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: DropdownButtonFormField<String>(
-                  iconSize: 0.0,
-                    decoration:InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                        borderSide: BorderSide(width: 2.0, color: Colors.black),
-                      ),
-                      prefixIcon: Icon(Icons.location_on_outlined)
-                    ) ,
-                   validator: (value) =>
-                       value == null ? 'Choose your Location' : null,
-
-                   isExpanded: true,
-                   // focusColor:Colors.white,
-                   value: _chosenValue,
-                   //elevation: 5,
-                   // style: TextStyle(color: Colors.white),
-
-                   items: <String>[
-                     'Kathmandu',
-                     'Lalitpur',
-                     'Bhaktapur',
-                     'Dhankuta',
-                     'Ilam',
-                     'Jhapa',
-                     'Khotang',
-                     'Morang',
-                     'Okhaldhunga',
-                     'Panchthar',
-                     'Sankhuwasabha',
-                     'Solukhumbu',
-                     'Sunsari',
-                     'Taplejung',
-                     'Tehrathum',
-                     'Udayapur',
-                     'Bara',
-                     'Parsa',
-                     'Dhanusha',
-                     'Mahottari',
-                     'Rautahat',
-                     'Saptari',
-                     'Sarlahi',
-                     'Siraha',
-                     'Chitwan',
-                     'Dhading',
-                     'Dolakha',
-                     'Kavrepalanchok',
-                     'Makwanpur',
-                     'Nuwakot',
-                     'Ramechhap',
-                     'Rasuwa',
-                     'Sindhuli',
-                     'Sindhupalchok',
-                     'Baglung',
-                     'Gorkha',
-                     'Kaski',
-                     'Lamjung',
-                     'Manang',
-                     'Mustang',
-                     'Myagdi',
-                     'Nawalpur',
-                     'Parbat',
-                     'Syangja',
-                     'Tanahun',
-                     'Arghakhanchi',
-                     'Banke',
-                     'Bardiya',
-                     'Dang',
-                     'Eastern Rukum',
-                     'Gulmi',
-                     'Kapilavastu',
-                     'Parasi',
-                     'Palpa',
-                     'Pyuthan',
-                     'Rolpa',
-                     'Rupandehi',
-                     'Dailekh',
-                     'Dolpa',
-                     'Humla',
-                     'Jajarkot',
-                     'Jumla',
-                     'Kalikot',
-                     'Mugu',
-                     'Salyan',
-                     'Surkhet',
-                     'Western Rukum',
-                     'Achham',
-                     'Baitadi',
-                     'Bajhang',
-                     'Bajura',
-                     'Dadeldhura',
-                     'Darchula',
-                     'Doti',
-                     'Kailali',
-                     'Kanchanpur',
-                   ].map<DropdownMenuItem<String>>((String value) {
-                     return DropdownMenuItem<String>(
-                       value: value,
-                       child: Text(
-                         value,
-                         style: TextStyle(color: Colors.black),
-                       ),
-                     );
-                   }).toList(),
-                   hint: Text(
-                     "Select your address",
-                     style: TextStyle(
-                         color: Colors.grey[600],
-                         fontSize: 16,
-                         fontWeight: FontWeight.w400),
-                   ),
-                   onChanged: (String value) async {
-                     setState(() {
-                       _chosenValue = value;
-                     });
-                   }),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextFormField(
-                  keyboardType: TextInputType.phone,
-                  autocorrect: false,
-                  controller: dateController,
-                  onTap: () {
-                    _selectDate();
-                  },
-                  validator: (value) {
-                    if (value.isEmpty || value.length < 1) {
-                      return 'Choose Date';
-                    }
-                    return null;
-                  },
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                      borderSide: BorderSide(width: 2.0, color: Colors.black)
-                    ),
-                    prefixIcon: Icon(Icons.calendar_today),
-                    labelText: 'Date of Birth'
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: formField('Email', Icon(Icons.email_sharp), false, emailValidator)
-
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: formField('Contact', Icon(Icons.phone_android), false, contactValidator)
-
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: formField('Password', Icon(Icons.lock), true, passValidator)
-
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: formField('Confirm Password', Icon(Icons.lock), true, confirmpassValidator)
-              ),
-              Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: InkWell(
-                  onTap: () {
-                    if (_formKey.currentState.validate()) {
-                      Navigator.push(context, MaterialPageRoute(
-                          builder: (context) => LoginPage()));
-                    } else {
-                      print("Not Validated");
-                    }
-
-                  },
-                  child: Card(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8.0)),
-                    color: Colors.indigo[100],
-                    child: Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: Text(
-                        'Register',
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.w500,),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-      bottomNavigationBar: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+      body: Stack(
         children: [
-          Text(
-            "Already Have an account?  ",
-            style: TextStyle(
-              fontWeight: FontWeight.w500,
-              fontSize: 15,
+          Utils.bgImage(context),
+          Container(
+            color: Utils.color,
+            child: Form(
+              key: _formKey,
+              child: ListView(
+                children: [
+                  Utils.appBar('key', 'Sign Up', context),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Utils.formField(fullnames,'Full Name', Icon(Icons.account_circle), false, validator),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: DropdownButtonFormField<String>(
+                      iconSize: 0.0,
+                        decoration:InputDecoration(
+                            filled: true,
+                            fillColor: Colors.white.withOpacity(0.3),
+                            focusColor: Colors.black,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                            borderSide: BorderSide(width: 2.0, color: Colors.black),
+                          ),
+                          prefixIcon: Icon(Icons.location_on_outlined)
+                        ) ,
+                       validator: (value) =>
+                           value == null ? 'Choose your Location' : null,
+
+                       isExpanded: true,
+                       // focusColor:Colors.white,
+                       value: _chosenValue,
+                       //elevation: 5,
+                       // style: TextStyle(color: Colors.white),
+
+                       items: <String>[
+                         'Kathmandu',
+                         'Lalitpur',
+                         'Bhaktapur',
+                         'Dhankuta',
+                         'Ilam',
+                         'Jhapa',
+                         'Khotang',
+                         'Morang',
+                         'Okhaldhunga',
+                         'Panchthar',
+                         'Sankhuwasabha',
+                         'Solukhumbu',
+                         'Sunsari',
+                         'Taplejung',
+                         'Tehrathum',
+                         'Udayapur',
+                         'Bara',
+                         'Parsa',
+                         'Dhanusha',
+                         'Mahottari',
+                         'Rautahat',
+                         'Saptari',
+                         'Sarlahi',
+                         'Siraha',
+                         'Chitwan',
+                         'Dhading',
+                         'Dolakha',
+                         'Kavrepalanchok',
+                         'Makwanpur',
+                         'Nuwakot',
+                         'Ramechhap',
+                         'Rasuwa',
+                         'Sindhuli',
+                         'Sindhupalchok',
+                         'Baglung',
+                         'Gorkha',
+                         'Kaski',
+                         'Lamjung',
+                         'Manang',
+                         'Mustang',
+                         'Myagdi',
+                         'Nawalpur',
+                         'Parbat',
+                         'Syangja',
+                         'Tanahun',
+                         'Arghakhanchi',
+                         'Banke',
+                         'Bardiya',
+                         'Dang',
+                         'Eastern Rukum',
+                         'Gulmi',
+                         'Kapilavastu',
+                         'Parasi',
+                         'Palpa',
+                         'Pyuthan',
+                         'Rolpa',
+                         'Rupandehi',
+                         'Dailekh',
+                         'Dolpa',
+                         'Humla',
+                         'Jajarkot',
+                         'Jumla',
+                         'Kalikot',
+                         'Mugu',
+                         'Salyan',
+                         'Surkhet',
+                         'Western Rukum',
+                         'Achham',
+                         'Baitadi',
+                         'Bajhang',
+                         'Bajura',
+                         'Dadeldhura',
+                         'Darchula',
+                         'Doti',
+                         'Kailali',
+                         'Kanchanpur',
+                       ].map<DropdownMenuItem<String>>((String value) {
+                         return DropdownMenuItem<String>(
+                           value: value,
+                           child: Text(
+                             value,
+                             style: TextStyle(color: Colors.black),
+                           ),
+                         );
+                       }).toList(),
+                       hint: Text(
+                         "Select your address",
+                         style: TextStyle(
+                             color: Colors.white,
+                             fontSize: 16,
+                             fontWeight: FontWeight.w400),
+                       ),
+                       onChanged: (String value) async {
+                         setState(() {
+                           _chosenValue = value;
+                         });
+                       }),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextFormField(
+                      keyboardType: TextInputType.phone,
+                      autocorrect: false,
+                      controller: dateController,
+                      onTap: () {
+                        _selectDate();
+                      },
+                      validator: (value) {
+                        if (value.isEmpty || value.length < 1) {
+                          return 'Choose Date';
+                        }
+                        return null;
+                      },
+                      decoration: InputDecoration(
+                          filled: true,
+                          fillColor: Colors.white.withOpacity(0.3),
+                          focusColor: Colors.black,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                          borderSide: BorderSide(width: 2.0, color: Colors.black)
+                        ),
+                        prefixIcon: Icon(Icons.calendar_today),
+                        labelText: 'Date of Birth',
+                        labelStyle: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Utils.formField(emails,'Email', Icon(Icons.email_sharp), false, emailValidator)
+
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Utils.formField(phones,'Contact', Icon(Icons.phone_android), false, contactValidator)
+
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Utils.formField(passwords,'Password', Icon(Icons.lock), true, passValidator)
+
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Utils.formField(cpasswords,'Confirm Password', Icon(Icons.lock), true, confirmpassValidator)
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: InkWell(
+                      onTap: () {
+                        if (_formKey.currentState.validate()) {
+                          Navigator.push(context, MaterialPageRoute(
+                              builder: (context) => LoginPage()));
+                        } else {
+                          print("Not Validated");
+                        }
+
+                      },
+                     child: Card(
+                    shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8.0)),
+              color: Colors.green,
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Text(
+                  'Sign Up',
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.white),
+                  textAlign: TextAlign.center,
+                ),
+              ),
             ),
-          ),
-          InkWell(
-            onTap: (){
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>LoginPage()));
-            },
-            child: Text(
-              "Log In",
-              style: TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.blue,
-                  decoration: TextDecoration.underline),
+                    ),
+                  ),
+                  Center(
+                    child: Text("Already have an account?",style: TextStyle(fontWeight: FontWeight.w400,color: Utils.white
+                    ),),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  login(),
+                  SizedBox(
+                    height: 50,
+                  ),
+                ],
+              ),
+
             ),
+
           ),
         ],
       ),
+
     );
   }
-  Widget formField(String label,Widget icon,bool obs,String Function(String) validator){
-    return TextFormField(
-      decoration: InputDecoration(
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8.0),
-            borderSide: BorderSide(color: Colors.orange),
-          ),
-          labelText: label,
-          prefixIcon: icon,
-      ),
-      obscureText: true,
-      validator: validator,
-    );
-  }
+
   String validator(String vali){
     if (vali.isEmpty){
       return 'Name Required';
@@ -334,6 +334,18 @@ class _RegisterPageState extends State<RegisterPage> {
     else{
       return null;
     }
+  }
+  Widget login(){
+    return Center(
+      child: InkWell(
+        onTap: (){
+          Navigator.pop(context);
+          // Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginPage()));
+        },
+        child: Text("Log In",style: TextStyle(fontWeight: FontWeight.w600,color: Utils.white,fontSize: 20, decoration: TextDecoration.underline
+        ),),
+      ),
+    );
   }
 
   }

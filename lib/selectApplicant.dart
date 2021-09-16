@@ -50,15 +50,15 @@ class _SelectApplicantState extends State<SelectApplicant> {
                               child: Card(
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(8.0)),
-                                color: Colors.blue[100],
+                                color: Colors.green,
                                 child: Padding(
                                   padding: const EdgeInsets.all(12.0),
                                   child: Text(
-                                    '+ New Application',
+                                    '+ New Applicant',
                                     style: TextStyle(
-                                        fontSize: 18,
+                                        fontSize: 20,
                                         fontWeight: FontWeight.w500,
-                                        color: Colors.indigo),
+                                        color: Colors.white),
                                     textAlign: TextAlign.center,
                                   ),
                                 ),

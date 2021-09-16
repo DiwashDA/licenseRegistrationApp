@@ -127,7 +127,7 @@ class _LoginPageState extends State<LoginPage> {
         onTap: (){
           Navigator.push(context, MaterialPageRoute(builder: (context)=>RegisterPage()));
         },
-        child: Text("Sign Up Now",style: TextStyle(fontWeight: FontWeight.w600,color: Utils.white,fontSize: 20
+        child: Text("Sign Up Now",style: TextStyle(fontWeight: FontWeight.w600,color: Utils.white,fontSize: 20, decoration: TextDecoration.underline
         ),),
       ),
     );

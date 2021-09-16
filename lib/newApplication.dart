@@ -71,72 +71,14 @@ class _NewApplicationState extends State<NewApplication> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Utils.formField(fullname, 'Full Name', Icon(Icons.account_circle), false, (p0) => null)
-                  // TextFormField(
-                  //
-                  //   decoration: InputDecoration(
-                  //     border: OutlineInputBorder(
-                  //       borderRadius: BorderRadius.circular(8.0),
-                  //       borderSide: BorderSide(color: Utils.white),
-                  //     ),
-                  //     prefixIcon: Icon(
-                  //       Icons.account_circle,
-                  //       color: Utils.white,
-                  //     ),
-                  //     labelText: 'Full Name',
-                  //   ),
-                  //   validator: (value) {
-                  //     if (value.isEmpty) {
-                  //       return "Name can't be empty";
-                  //     }
-                  //     return null;
-                  //   },
-                  // ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Utils.formField(citizen, 'Citizenship Number', Icon(Icons.wysiwyg_outlined), false, (p0) => null)
-                  // TextFormField(
-                  //   decoration: InputDecoration(
-                  //     border: OutlineInputBorder(
-                  //       borderRadius: BorderRadius.circular(8.0),
-                  //     ),
-                  //     prefixIcon: Icon(
-                  //       Icons.wysiwyg_outlined,
-                  //       color: Colors.black,
-                  //     ),
-                  //     labelText: 'Citizenship Number',
-                  //   ),
-                  //   validator: (value) {
-                  //     if (value.isEmpty) {
-                  //       return "Required";
-                  //     }
-                  //     return null;
-                  //   },
-                  //   keyboardType: TextInputType.phone,
-                  // ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Utils.formField(address, 'Address', Icon(Icons.location_on_outlined), false, (p0) => null)
-                  // TextFormField(
-                  //   decoration: InputDecoration(
-                  //     border: OutlineInputBorder(
-                  //       borderRadius: BorderRadius.circular(8.0),
-                  //       borderSide: BorderSide(color: Colors.orange),
-                  //     ),
-                  //     prefixIcon: Icon(
-                  //       Icons.location_on_outlined,
-                  //       color: Colors.black,
-                  //     ),
-                  //     labelText: 'Address',
-                  //   ),
-                  //   validator: (value) {
-                  //     if (value.isEmpty) {
-                  //       return "Required";
-                  //     }
-                  //     return null;
-                  //   },
-                  // ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -164,7 +106,7 @@ class _NewApplicationState extends State<NewApplication> {
                       labelText: 'Date of Birth',
                       prefixIcon: Icon(Icons.calendar_today, color: Colors.black),
                       labelStyle:
-                          TextStyle(decorationStyle: TextDecorationStyle.solid, color: Colors.black),
+                          TextStyle(decorationStyle: TextDecorationStyle.solid, color: Colors.white),
                     ),
                   ),
                 ),
@@ -195,14 +137,14 @@ class _NewApplicationState extends State<NewApplication> {
                           value: value,
                           child: Text(
                             value,
-                            style: TextStyle(color: Colors.black),
+                            style: TextStyle(color: Colors.white),
                           ),
                         );
                       }).toList(),
                       hint: Text(
                         "Select your Gender",
                         style: TextStyle(
-                            color: Colors.black,
+                            color: Colors.white,
                             fontSize: 16,
                             fontWeight: FontWeight.w400),
                       ),
@@ -228,7 +170,7 @@ class _NewApplicationState extends State<NewApplication> {
                           Icon(Icons.image),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Text('Select Picture', style: TextStyle(fontSize: 16.0, color: Colors.black),),
+                            child: Text('Select Picture', style: TextStyle(fontSize: 16.0, color: Colors.white),),
                           ),
                           Expanded(
                             child: IconButton(
@@ -300,14 +242,14 @@ class _NewApplicationState extends State<NewApplication> {
                           value: value,
                           child: Text(
                             value,
-                            style: TextStyle(color: Colors.black),
+                            style: TextStyle(color: Colors.white),
                           ),
                         );
                       }).toList(),
                       hint: Text(
                         "Select Office",
                         style: TextStyle(
-                            color: Colors.black,
+                            color: Colors.white,
                             fontSize: 16,
                             fontWeight: FontWeight.w400),
                       ),
@@ -374,7 +316,7 @@ class _NewApplicationState extends State<NewApplication> {
                       hint: Text(
                         "Select Category",
                         style: TextStyle(
-                            color: Colors.black,
+                            color: Colors.white,
                             fontSize: 16,
                             fontWeight: FontWeight.w400),
                       ),
@@ -391,10 +333,19 @@ class _NewApplicationState extends State<NewApplication> {
 
                     },
                     child: Card(
-                      color: Colors.blue,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8.0)),
+                      color: Colors.green,
                       child: Padding(
                         padding: const EdgeInsets.all(12.0),
-                        child: Text("Submit", style: TextStyle(fontSize: 15.0, fontWeight: FontWeight.w500, color: Colors.black),textAlign: TextAlign.center,),
+                        child: Text(
+                          'Submit',
+                          style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.white),
+                          textAlign: TextAlign.center,
+                        ),
                       ),
                     ),
                   ),
