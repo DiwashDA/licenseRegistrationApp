@@ -41,29 +41,79 @@ class Utils {
   }
   static Color white = Colors.white;
   static Color color = Colors.black.withOpacity(0.5);
+  static swipe(){
+    return Container(
+      color: Color.fromRGBO(0, 0, 139, 0.7),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(
+            Icons.arrow_left,
+            color: Colors.green,
+            size: 40,
+          ),
+          Icon(
+            Icons.arrow_left,
+            color: Colors.green,
+            size: 40,
+          ),
+          Icon(
+            Icons.arrow_left,
+            color: Colors.green,
+            size: 40,
+          ),
+          Text(
+            "SWIPE",
+            style: TextStyle(
+                color: Colors.green,
+                fontWeight: FontWeight.w800,
+                fontSize: 20),
+          ),
+          Icon(
+            Icons.arrow_right,
+            color: Colors.green,
+            size: 40,
+          ),
+          Icon(
+            Icons.arrow_right,
+            color: Colors.green,
+            size: 40,
+          ),
+          Icon(
+            Icons.arrow_right,
+            color: Colors.green,
+            size: 40,
+          ),
+        ],
+      ),
+    );
+  }
 
   static Widget formField(TextEditingController controller, String label,
       Widget icon, bool obs, String Function(String) validator) {
-    return TextFormField(
-      controller: controller,
-      decoration: InputDecoration(
-        filled: true,
-        fillColor: Colors.white.withOpacity(0.3),
-        focusColor: Colors.black,
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.black, style: BorderStyle.solid),
-          borderRadius: BorderRadius.circular(8.0),
+    return Padding(
+      padding: const EdgeInsets.only(top:8.0),
+      child: TextFormField(
+        controller: controller,
+        decoration: InputDecoration(
+          filled: true,
+          fillColor: Colors.white.withOpacity(0.3),
+          focusColor: Colors.black,
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.black, style: BorderStyle.solid),
+            borderRadius: BorderRadius.circular(8.0),
+          ),
+          border: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.black, style: BorderStyle.solid),
+            borderRadius: BorderRadius.circular(8.0),
+          ),
+          labelText: label,
+          labelStyle: TextStyle(color: Colors.white),
+          prefixIcon: icon,
         ),
-        border: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.black, style: BorderStyle.solid),
-          borderRadius: BorderRadius.circular(8.0),
-        ),
-        labelText: label,
-        labelStyle: TextStyle(color: Colors.white),
-        prefixIcon: icon,
+        obscureText: obs,
+        validator: validator,
       ),
-      obscureText: obs,
-      validator: validator,
     );
   }
 
