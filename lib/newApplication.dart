@@ -48,14 +48,21 @@ class _NewApplicationState extends State<NewApplication> {
   File imageFile;
   TextEditingController fullname = TextEditingController();
   TextEditingController citizen = TextEditingController();
-  TextEditingController address = TextEditingController();
+  TextEditingController citizend = TextEditingController();
+  TextEditingController zone = TextEditingController();
+  TextEditingController district = TextEditingController();
+  TextEditingController province = TextEditingController();
+  TextEditingController tole = TextEditingController();
+  TextEditingController ward = TextEditingController();
+  TextEditingController number = TextEditingController();
+  TextEditingController email = TextEditingController();
   TextEditingController dob = TextEditingController();
   TextEditingController gender = TextEditingController();
   TextEditingController image = TextEditingController();
   TextEditingController office = TextEditingController();
   TextEditingController category = TextEditingController();
-
-
+  TextEditingController witnessname = TextEditingController();
+  TextEditingController witnessrel = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -68,17 +75,10 @@ class _NewApplicationState extends State<NewApplication> {
             child: ListView(
               children: [
                 Utils.appBar('key', 'New Applicant', context),
+                Text('Demographic Details', style: TextStyle(color: Utils.white, fontSize: 18),textAlign: TextAlign.center,),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Utils.formField(fullname, 'Full Name', Icon(Icons.account_circle), false, (p0) => null)
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Utils.formField(citizen, 'Citizenship Number', Icon(Icons.wysiwyg_outlined), false, (p0) => null)
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Utils.formField(address, 'Address', Icon(Icons.location_on_outlined), false, (p0) => null)
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -106,7 +106,7 @@ class _NewApplicationState extends State<NewApplication> {
                       labelText: 'Date of Birth',
                       prefixIcon: Icon(Icons.calendar_today, color: Colors.black),
                       labelStyle:
-                          TextStyle(decorationStyle: TextDecorationStyle.solid, color: Colors.white),
+                      TextStyle(decorationStyle: TextDecorationStyle.solid, color: Colors.white),
                     ),
                   ),
                 ),
@@ -128,7 +128,7 @@ class _NewApplicationState extends State<NewApplication> {
                             color: Colors.black,
                           )),
                       validator: (value) =>
-                          value == null ? 'Select your Gender' : null,
+                      value == null ? 'Select your Gender' : null,
                       isExpanded: true,
                       value: _newValue,
                       items: <String>['Male', 'Female', 'Other']
@@ -137,7 +137,7 @@ class _NewApplicationState extends State<NewApplication> {
                           value: value,
                           child: Text(
                             value,
-                            style: TextStyle(color: Colors.white),
+                            style: TextStyle(color: Colors.black),
                           ),
                         );
                       }).toList(),
@@ -158,9 +158,9 @@ class _NewApplicationState extends State<NewApplication> {
                   padding: const EdgeInsets.all(8.0),
                   child: Container(
                     decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.3),
-                     borderRadius: BorderRadius.circular(8.0),
-                      border: Border.all(color: Colors.grey)
+                        color: Colors.white.withOpacity(0.3),
+                        borderRadius: BorderRadius.circular(8.0),
+                        border: Border.all(color: Colors.grey)
 
                     ),
                     child: Padding(
@@ -189,7 +189,102 @@ class _NewApplicationState extends State<NewApplication> {
                     ),
                   ),
                 ),
+
                 imageFile==null?Container():ClipRRect(borderRadius: BorderRadius.circular(20),child: Container(height:300,child: Image.file(imageFile,))),
+
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Utils.formField(citizen, 'Citizenship Number', Icon(Icons.wysiwyg_outlined), false, (p0) => null)
+                ),
+                Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Utils.formField(citizend, 'Citizenship Issue District', Icon(Icons.wysiwyg_outlined), false, (p0) => null)
+                ),
+                Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Utils.formField(citizen, 'Passport Number', Icon(Icons.book), false, (p0) => null)
+                ),
+                Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Utils.formField(citizend, 'Passport Issue Country', Icon(Icons.location_on_outlined), false, (p0) => null)
+                ),
+                Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Utils.formField(witnessname, 'Witness Full Name', Icon(Icons.account_box), false, (p0) => null)
+                ),
+                Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Utils.formField(witnessrel, 'Witness Relationship', Icon(Icons.account_box), false, (p0) => null)
+                ),
+
+                Text('Address Details', style: TextStyle(color: Utils.white, fontSize: 18),textAlign: TextAlign.center,),
+                Padding(
+                  padding: const EdgeInsets.only(left: 8.0),
+                  child: Text('Permanent Address', style: TextStyle(color: Utils.white, fontSize: 12),),
+                ),
+                Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Utils.formField(zone, 'Zone', Icon(Icons.location_on_outlined), false, (p0) => null)
+                ),
+                Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Utils.formField(district, 'District', Icon(Icons.location_on_outlined), false, (p0) => null)
+                ),
+                Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Utils.formField(province, 'Province', Icon(Icons.location_on_outlined), false, (p0) => null)
+                ),
+                Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Utils.formField(tole, 'Tole', Icon(Icons.location_on_outlined), false, (p0) => null)
+                ),
+                Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Utils.formField(ward, 'Ward No', Icon(Icons.location_on_outlined), false, (p0) => null)
+                ),
+                Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Utils.formField(number, 'Mobile Number', Icon(Icons.phone_android), false, (p0) => null)
+                ),
+                Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Utils.formField(email, 'Email', Icon(Icons.mail_outline), false, (p0) => null)
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 8.0),
+                  child: Text('Temporary Address', style: TextStyle(color: Utils.white, fontSize: 12),),
+                ),
+                Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Utils.formField(zone, 'Zone', Icon(Icons.location_on_outlined), false, (p0) => null)
+                ),
+                Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Utils.formField(district, 'District', Icon(Icons.location_on_outlined), false, (p0) => null)
+                ),
+                Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Utils.formField(province, 'Province', Icon(Icons.location_on_outlined), false, (p0) => null)
+                ),
+                Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Utils.formField(tole, 'Tole', Icon(Icons.location_on_outlined), false, (p0) => null)
+                ),
+                Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Utils.formField(ward, 'Ward No', Icon(Icons.location_on_outlined), false, (p0) => null)
+                ),
+                Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Utils.formField(number, 'Mobile Number', Icon(Icons.phone_android), false, (p0) => null)
+                ),
+                Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Utils.formField(email, 'Email', Icon(Icons.mail_outline), false, (p0) => null)
+                ),
+
+                Text('Exam Information', style: TextStyle(color: Utils.white, fontSize: 18),textAlign: TextAlign.center,),
+
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: DropdownButtonFormField<String>(

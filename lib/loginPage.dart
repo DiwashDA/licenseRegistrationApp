@@ -138,14 +138,17 @@ class _LoginPageState extends State<LoginPage> {
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => RegisterPage()));
         },
-        child: Text(
-          "Sign Up Now",
-          style: TextStyle(
-              fontWeight: FontWeight.w600,
-              color: Utils.white,
-              fontSize: 20,
-              decoration: TextDecoration.underline),
-        ),
+
+        // child: Text(
+        //   "Sign Up Now",
+        //   style: TextStyle(
+        //       fontWeight: FontWeight.w600,
+        //       color: Utils.white,
+        //       fontSize: 20,
+        //       decoration: TextDecoration.underline),
+        // ),
+        child: Text("Sign Up Now",style: TextStyle(fontWeight: FontWeight.w600,color: Utils.white,fontSize: 20, decoration: TextDecoration.underline,
+        ),),
       ),
     );
   }
