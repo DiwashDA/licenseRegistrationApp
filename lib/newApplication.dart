@@ -199,6 +199,14 @@ class _NewApplicationState extends State<NewApplication> {
                 ),
                 Padding(
                     padding: const EdgeInsets.all(8.0),
+                    child: Utils.formField(citizen, 'Passport Number', Icon(Icons.book), false, (p0) => null)
+                ),
+                Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Utils.formField(citizend, 'Passport Issue Country', Icon(Icons.location_on_outlined), false, (p0) => null)
+                ),
+                Padding(
+                    padding: const EdgeInsets.all(8.0),
                     child: Utils.formField(witnessname, 'Witness Full Name', Icon(Icons.account_box), false, (p0) => null)
                 ),
                 Padding(
