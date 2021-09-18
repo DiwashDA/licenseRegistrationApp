@@ -9,10 +9,18 @@ class ApiService {
     try {
       var response = await Dio().post(baseUrl + "users/login", data: data);
       print(response.data);
-      if (response.statusCode == 200)
-        return response.data;
-      else
-        print("sadbajd");
+      if (response.statusCode == 200) return response;
+    } on DioError catch (e) {
+      print(e.response);
+      return e.response;
+    }
+  }
+
+  Future logOut() async {
+    try {
+      var response = await Dio().post(baseUrl + "users/logout");
+      print(response.data);
+      if (response.statusCode == 200) return response.data;
     } on DioError catch (e) {
       print(e.response);
       return e;
@@ -65,14 +73,15 @@ class ApiService {
     };
     try {
       var response = await Dio().post(baseUrl + "users/register", data: data);
-      print(response.data);
-      if (response.statusCode == 200)
-        return response.data;
-      else
-        print("sadbajd");
+      print("///////////////////");
+      print(response.statusCode);
+      if (response.statusCode == 201) {
+        print(response.statusCode);
+        return response.statusCode;
+      }
     } on DioError catch (e) {
-      print(e.response);
-      return e;
+      print(e.response.data);
+      return e.response.data;
     }
   }
 
@@ -91,7 +100,8 @@ class ApiService {
       return e;
     }
   }
-  Future getAnApplicant(id)async{
+
+  Future getAnApplicant(id) async {
     var token = await Utils.getToken();
     Dio().options.headers = {'authorization': 'Bearer+$token'};
     try {
@@ -106,7 +116,8 @@ class ApiService {
       return e;
     }
   }
-  Future getAccountDetails()async{
+
+  Future getAccountDetails() async {
     var token = await Utils.getToken();
     Dio().options.headers = {'authorization': 'Bearer+$token'};
     try {

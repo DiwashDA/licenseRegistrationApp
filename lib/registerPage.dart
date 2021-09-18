@@ -1,3 +1,4 @@
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -26,16 +27,23 @@ class _RegisterPageState extends State<RegisterPage> {
       firstDate: DateTime(1900),
       lastDate: DateTime(2040),
     );
+    print(newSelectedDate);
+
 
     if (newSelectedDate != null) {
       _selectedDate = newSelectedDate;
+      print(newSelectedDate);
+      print("?????????????????????????????????????");
+      print(_selectedDate);
 
       dateController
         ..text = DateFormat.yMMMd().format(_selectedDate)
         ..selection = TextSelection.fromPosition(TextPosition(
             offset: dateController.text.length,
             affinity: TextAffinity.upstream));
-      setState(() {});
+      setState(() {
+        dobs.text = _selectedDate.year.toString()+"/"+_selectedDate.month.toString()+"/"+_selectedDate.day.toString();
+      });
     }
   }
 
@@ -184,6 +192,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         onChanged: (String value) async {
                           setState(() {
                             _chosenValue = value;
+                            print(_chosenValue);
                           });
                         }),
                   ),
@@ -236,10 +245,9 @@ class _RegisterPageState extends State<RegisterPage> {
                     padding: const EdgeInsets.all(12.0),
                     child: InkWell(
                       onTap: () {
-                        if (_formKey.currentState.validate()) {
                           ApiService()
                               .register(
-                                  addresses.text,
+                                 _chosenValue,
                                   passwords.text,
                                   fullnames.text,
                                   emails.text,
@@ -247,11 +255,14 @@ class _RegisterPageState extends State<RegisterPage> {
                                   phones.text,
                                   cpasswords.text)
                               .then((value) {
-                            print(value);
+                            if(value==201){
+                              Fluttertoast.showToast(msg: "User Registered Successfully");
+                              Navigator.removeRoute(context, MaterialPageRoute(builder: (context)=>LoginPage()));
+                            }
+                            else
+                              Fluttertoast.showToast(msg: "Registration Failed\nPlease Check Your Credentials And Try Againa",timeInSecForIosWeb:10 );
+
                           });
-                        } else {
-                          print("Not Validated");
-                        }
                       },
                       child: Card(
                         shape: RoundedRectangleBorder(

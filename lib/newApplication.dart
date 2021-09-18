@@ -67,7 +67,6 @@ class _NewApplicationState extends State<NewApplication> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: Utils.swipe(),
       body: Stack(
         children: [
           Utils.bgImage(context),
@@ -81,6 +80,7 @@ class _NewApplicationState extends State<NewApplication> {
                         padding: EdgeInsets.all(15),
                         color: Colors.blue.withOpacity(0.1),
                         child: form())),
+                Utils.swipe()
               ],
             ),
           ),
@@ -119,158 +119,290 @@ class _NewApplicationState extends State<NewApplication> {
         children: [
           Text(
             'Demographic Details',
-            style: TextStyle(color: Utils.white, fontSize: 18),
+            style: TextStyle(color: Utils.white, fontSize: 20),
             textAlign: TextAlign.center,
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.3),
-                  borderRadius: BorderRadius.circular(8.0),
-                  border: Border.all(color: Colors.grey)),
+          Card(
+              color: Utils.color,
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  children: [
-                    Icon(Icons.image),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        'Select A PP Sized Picture',
-                        style: TextStyle(fontSize: 16.0, color: Colors.white),
-                      ),
-                    ),
-                    Expanded(
-                      child: IconButton(
-                        iconSize: 30.0,
-                        icon: Icon(Icons.image_search),
-                        onPressed: _getFromGallery,
-                      ),
-                    ),
-                    IconButton(
-                      iconSize: 30.0,
-                      icon: Icon(Icons.camera_alt_outlined),
-                      onPressed: _getFromCamera,
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-          imageFile == null
-              ? Container(
-                  color: Colors.grey.withOpacity(0.5),
-                  height: 150,
-                  width: 150,
-                  child: Center(
-                      child: Icon(
-                    Icons.person_outline,
-                    size: 150,
-                  )),
-                )
-              : ClipRRect(
-                  child: Container(
-                      height: 200,
-                      width: 200,
-                      child: Image.file(
-                        imageFile,
-                        fit: BoxFit.fill,
-                      ))),
-          Utils.formField(fullname, 'Full Name', Icon(Icons.account_circle),
-              false, (p0) => null),
-          Padding(
-            padding: const EdgeInsets.only(top: 8.0),
-            child: TextFormField(
-              keyboardType: TextInputType.phone,
-              autocorrect: false,
-              controller: birthDate,
-              onTap: () {
-                _selectDate();
-              },
-              validator: (value) {
-                if (value.isEmpty || value.length < 1) {
-                  return 'Choose Date';
-                }
-                return null;
-              },
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: Colors.white.withOpacity(0.3),
-                focusColor: Colors.black,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                  borderSide: BorderSide(color: Colors.grey),
-                ),
-                labelText: 'Date of Birth',
-                prefixIcon: Icon(Icons.calendar_today, color: Colors.black),
-                labelStyle: TextStyle(
-                    decorationStyle: TextDecorationStyle.solid,
-                    color: Colors.white),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 8.0),
-            child: DropdownButtonFormField<String>(
-                iconSize: 0.0,
-                decoration: InputDecoration(
-                    filled: true,
-                    fillColor: Colors.white.withOpacity(0.3),
-                    focusColor: Colors.black,
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                        borderSide: BorderSide(
-                          width: 2.0,
-                        )),
-                    prefixIcon: Icon(
-                      Icons.person_sharp,
-                      color: Colors.black,
-                    )),
-                validator: (value) =>
-                    value == null ? 'Select your Gender' : null,
-                isExpanded: true,
-                value: _newValue,
-                items: <String>['Male', 'Female', 'Other']
-                    .map<DropdownMenuItem<String>>((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(
-                      value,
-                      style: TextStyle(color: Colors.black),
-                    ),
-                  );
-                }).toList(),
-                hint: Text(
-                  "Select your Gender",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400),
-                ),
-                onChanged: (String value) async {
-                  setState(() {
-                    _newValue = value;
-                  });
-                }),
-          ),
-          Utils.formField(citizen, 'Citizenship Number',
-              Icon(Icons.wysiwyg_outlined), false, (p0) => null),
-          Utils.formField(citizend, 'Citizenship Issue District',
-              Icon(Icons.wysiwyg_outlined), false, (p0) => null),
-          Utils.formField(citizen, 'Passport Number', Icon(Icons.book), false,
-              (p0) => null),
-          Utils.formField(citizend, 'Passport Issue Country',
-              Icon(Icons.location_on_outlined), false, (p0) => null),
-          Utils.formField(witnessname, 'Witness Full Name',
-              Icon(Icons.account_box), false, (p0) => null),
-          Utils.formField(witnessrel, 'Witness Relationship',
-              Icon(Icons.account_box), false, (p0) => null),
+                  padding: const EdgeInsets.all(8.0), child: personal())),
+          Card(
+              color: Utils.color,
+              child: Padding(padding: const EdgeInsets.all(8.0), child: id())),
           SizedBox(
             width: 50,
           ),
         ],
       ),
+    );
+  }
+
+  Widget personal() {
+    return Column(
+      children: [
+        Text(
+          'Personal Details',
+          style: TextStyle(color: Utils.white, fontSize: 16),
+          textAlign: TextAlign.center,
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Container(
+            decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.3),
+                borderRadius: BorderRadius.circular(8.0),
+                border: Border.all(color: Colors.grey)),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  Icon(Icons.image),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      'PP Sized Picture',
+                      style: TextStyle(fontSize: 16.0, color: Colors.white),
+                    ),
+                  ),
+                  Expanded(
+                    child: IconButton(
+                      iconSize: 30.0,
+                      icon: Icon(Icons.image_search),
+                      onPressed: _getFromGallery,
+                    ),
+                  ),
+                  IconButton(
+                    iconSize: 30.0,
+                    icon: Icon(Icons.camera_alt_outlined),
+                    onPressed: _getFromCamera,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+        imageFile == null
+            ? Container(
+                color: Colors.grey.withOpacity(0.5),
+                height: 150,
+                width: 150,
+                child: Center(
+                    child: Icon(
+                  Icons.person_outline,
+                  size: 150,
+                )),
+              )
+            : ClipRRect(
+                child: Container(
+                    height: 200,
+                    width: 200,
+                    child: Image.file(
+                      imageFile,
+                      fit: BoxFit.fill,
+                    ))),
+        Utils.formField(fullname, 'Full Name', Icon(Icons.account_circle),
+            false, (p0) => null),
+        Padding(
+          padding: const EdgeInsets.only(top: 8.0),
+          child: TextFormField(
+            keyboardType: TextInputType.phone,
+            autocorrect: false,
+            controller: birthDate,
+            onTap: () {
+              _selectDate();
+            },
+            validator: (value) {
+              if (value.isEmpty || value.length < 1) {
+                return 'Choose Date';
+              }
+              return null;
+            },
+            decoration: InputDecoration(
+              filled: true,
+              fillColor: Colors.white.withOpacity(0.3),
+              focusColor: Colors.black,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                borderSide: BorderSide(color: Colors.grey),
+              ),
+              labelText: 'Date of Birth',
+              prefixIcon: Icon(Icons.calendar_today, color: Colors.black),
+              labelStyle: TextStyle(
+                  decorationStyle: TextDecorationStyle.solid,
+                  color: Colors.white),
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 8.0),
+          child: DropdownButtonFormField<String>(
+              iconSize: 0.0,
+              decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Colors.white.withOpacity(0.3),
+                  focusColor: Colors.black,
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                      borderSide: BorderSide(
+                        width: 2.0,
+                      )),
+                  prefixIcon: Icon(
+                    Icons.person_sharp,
+                    color: Colors.black,
+                  )),
+              validator: (value) => value == null ? 'Select your Gender' : null,
+              isExpanded: true,
+              value: _newValue,
+              items: <String>['Male', 'Female', 'Other']
+                  .map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(
+                    value,
+                    style: TextStyle(color: Colors.black),
+                  ),
+                );
+              }).toList(),
+              hint: Text(
+                "Select your Gender",
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w400),
+              ),
+              onChanged: (String value) async {
+                setState(() {
+                  _newValue = value;
+                });
+              }),
+        ),
+      ],
+    );
+  }
+
+  Widget id() {
+    return Column(
+      children: [
+        Text(
+          'Identification Documents',
+          style: TextStyle(color: Utils.white, fontSize: 16),
+          textAlign: TextAlign.center,
+        ),
+        Utils.formField(citizen, 'Citizenship Number',
+            Icon(Icons.wysiwyg_outlined), false, (p0) => null),
+        Utils.formField(citizend, 'Citizenship Issue District',
+            Icon(Icons.wysiwyg_outlined), false, (p0) => null),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Container(
+            decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.3),
+                borderRadius: BorderRadius.circular(8.0),
+                border: Border.all(color: Colors.grey)),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  Icon(Icons.image),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      'Front Side',
+                      style: TextStyle(fontSize: 16.0, color: Colors.white),
+                    ),
+                  ),
+                  Expanded(
+                    child: IconButton(
+                      iconSize: 30.0,
+                      icon: Icon(Icons.image_search),
+                      onPressed: _getFromGallery,
+                    ),
+                  ),
+                  IconButton(
+                    iconSize: 30.0,
+                    icon: Icon(Icons.camera_alt_outlined),
+                    onPressed: _getFromCamera,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+        imageFile == null
+            ? Container(
+                color: Colors.grey.withOpacity(0.5),
+                height: 150,
+                width: 150,
+                child: Center(
+                    child: Icon(
+                  Icons.person_outline,
+                  size: 150,
+                )),
+              )
+            : ClipRRect(
+                child: Container(
+                    height: 200,
+                    width: 200,
+                    child: Image.file(
+                      imageFile,
+                      fit: BoxFit.fill,
+                    ))),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Container(
+            decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.3),
+                borderRadius: BorderRadius.circular(8.0),
+                border: Border.all(color: Colors.grey)),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  Icon(Icons.image),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      'Back Side',
+                      style: TextStyle(fontSize: 16.0, color: Colors.white),
+                    ),
+                  ),
+                  Expanded(
+                    child: IconButton(
+                      iconSize: 30.0,
+                      icon: Icon(Icons.image_search),
+                      onPressed: _getFromGallery,
+                    ),
+                  ),
+                  IconButton(
+                    iconSize: 30.0,
+                    icon: Icon(Icons.camera_alt_outlined),
+                    onPressed: _getFromCamera,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+        imageFile == null
+            ? Container(
+                color: Colors.grey.withOpacity(0.5),
+                height: 150,
+                width: 150,
+                child: Center(
+                    child: Icon(
+                  Icons.person_outline,
+                  size: 150,
+                )),
+              )
+            : ClipRRect(
+                child: Container(
+                    height: 200,
+                    width: 200,
+                    child: Image.file(
+                      imageFile,
+                      fit: BoxFit.fill,
+                    ))),
+      ],
     );
   }
 
@@ -290,7 +422,9 @@ class _NewApplicationState extends State<NewApplication> {
               child: contactInfo(),
             ),
           ),
-          SizedBox(height: 20,),
+          SizedBox(
+            height: 20,
+          ),
           Text(
             'Address Details',
             style: TextStyle(color: Utils.white, fontSize: 20),
@@ -413,11 +547,12 @@ class _NewApplicationState extends State<NewApplication> {
       ),
     );
   }
-  Widget exam(){
+
+  Widget exam() {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.only(top:8.0),
+          padding: const EdgeInsets.only(top: 8.0),
           child: DropdownButtonFormField<String>(
               iconSize: 0.0,
               decoration: InputDecoration(
@@ -432,7 +567,7 @@ class _NewApplicationState extends State<NewApplication> {
                     color: Colors.black,
                   )),
               validator: (value) =>
-              value == null ? 'Choose your Location' : null,
+                  value == null ? 'Choose your Location' : null,
               isExpanded: true,
               // focusColor:Colors.white,
               value: _locationValue,
@@ -486,7 +621,7 @@ class _NewApplicationState extends State<NewApplication> {
               }),
         ),
         Padding(
-          padding: const EdgeInsets.only(top:8.0),
+          padding: const EdgeInsets.only(top: 8.0),
           child: DropdownButtonFormField<String>(
               iconSize: 0.0,
               decoration: InputDecoration(

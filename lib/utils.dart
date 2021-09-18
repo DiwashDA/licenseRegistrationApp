@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:license_online/api/service.dart';
+import 'package:license_online/loginPage.dart';
+import 'package:license_online/main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Utils {
@@ -34,7 +37,10 @@ class Utils {
               color: Utils.white,
             ),
             onPressed: () {
-              Navigator.pop(context);
+              ApiService().logOut().then((value){
+                      Navigator.pushReplacement(context,
+                          MaterialPageRoute(builder: (context) => LoginPage()));
+                  });
             }):Container(),
       ],
     );
@@ -43,7 +49,7 @@ class Utils {
   static Color color = Colors.black.withOpacity(0.5);
   static swipe(){
     return Container(
-      color: Color.fromRGBO(0, 0, 139, 0.7),
+      color: Utils.color,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

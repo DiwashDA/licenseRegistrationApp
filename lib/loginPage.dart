@@ -116,14 +116,19 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   onLogin() {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => IndexPage()));
-    print("i am here");
+    Navigator.push(context, MaterialPageRoute(builder: (context)=>IndexPage()));
     var em = email.text;
     var pw = password.text;
     ApiService().login(em, pw).then((value) {
+      print(value.statusCode);
+      if(value.statusCode==200){
       Utils.saveToken(value);
-      print(value);
+      Fluttertoast.showToast(msg: "Logged In Successfully");
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>IndexPage()));}
+      else{
+        Fluttertoast.showToast(msg: "Username And/Or Password Is Incorrect");
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>IndexPage()));
+      }
     });
   }
 
