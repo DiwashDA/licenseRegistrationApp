@@ -1,8 +1,10 @@
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:license_online/api/service.dart';
 import 'package:license_online/utils.dart';
 
 class NewApplication extends StatefulWidget {
@@ -41,7 +43,13 @@ class _NewApplicationState extends State<NewApplication> {
         ..text = DateFormat.yMMMd().format(_selectedDate)
         ..selection = TextSelection.fromPosition(TextPosition(
             offset: birthDate.text.length, affinity: TextAffinity.upstream));
-      setState(() {});
+      setState(() {
+        dob.text = _selectedDate.year.toString() +
+            "-" +
+            _selectedDate.month.toString() +
+            "-" +
+            _selectedDate.day.toString();
+      });
     }
   }
 
@@ -525,7 +533,20 @@ class _NewApplicationState extends State<NewApplication> {
             ),
           ),
           InkWell(
-            onTap: () {},
+            onTap: () {
+              ApiService()
+                  .newApplication(fullname.text, citizen.text, address,
+                      dob.text, gender, imageFile, office.text, category.text)
+                  .then((value) {
+                    print(value);
+                if (value.statusCode == 201) {
+                  Fluttertoast.showToast(
+                      msg: "Application created successfully");
+                } else
+                  Fluttertoast.showToast(
+                      msg: "Error During Application Creation");
+              });
+            },
             child: Card(
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8.0)),

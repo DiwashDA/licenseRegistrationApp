@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:license_online/utils.dart';
 
 class ApiService {
@@ -8,10 +11,8 @@ class ApiService {
     var data = {"userEmail": "$email", "userPassword": "$password"};
     try {
       var response = await Dio().post(baseUrl + "users/login", data: data);
-      print(response.data);
-      if (response.statusCode == 200) return response;
+      return response;
     } on DioError catch (e) {
-      print(e.response);
       return e.response;
     }
   }
@@ -19,10 +20,8 @@ class ApiService {
   Future logOut() async {
     try {
       var response = await Dio().post(baseUrl + "users/logout");
-      print(response.data);
-      if (response.statusCode == 200) return response.data;
+      return response.data;
     } on DioError catch (e) {
-      print(e.response);
       return e;
     }
   }
@@ -30,33 +29,52 @@ class ApiService {
   Future changePassword(oldPass, newPass, confirmPass) async {
     var data = {};
     try {
-      var response = await Dio().post(baseUrl + "users/login", data: data);
+      var response = await Dio().patch(baseUrl + "users/login", data: data);
       print(response.data);
-      if (response.statusCode == 200)
-        return response.data;
-      else
-        print("sadbajd");
+      return response.data;
     } on DioError catch (e) {
-      print(e.response);
       return e;
     }
   }
 
-  Future newApplication() async {
-    var data = {};
+  Future newApplication(
+      applicantName,
+      applicantCitizenshipNumber,
+      applicantAddress,
+      applicantDOB,
+      applicantGender,
+      File applicantPhoto,
+      transportationOffice,
+      licenseType) async {
+    Dio dio = Dio();
+
+    //File _fileImage =File(applicantPhoto.path);
+    var file = await MultipartFile.fromFile(
+      applicantPhoto.path,
+      filename: applicantPhoto.path.split('/').last,
+    );
+    // var file =
+    //     await MultipartFile.fromFile(applicantPhoto.path, filename: filename);
+    var data = {
+      'applicantName': "$applicantName",
+      'applicantCitizenshipNumber': "$applicantCitizenshipNumber",
+      'applicantAddress': "applicantAddress",
+      'applicantDOB': "$applicantDOB",
+      'applicantGender': "$applicantGender",
+      'applicantPhoto': file,
+      'transportationOffice': "$transportationOffice",
+      'licenseType': "$licenseType"
+    };
     FormData formData = new FormData.fromMap(data);
     var token = await Utils.getToken();
-    Dio().options.headers = {'authorization': 'Bearer+$token'};
+    print(token);
+    dio.options.headers["authorization"] = "Bearer ${token}";
+    dio.options.headers["content-type"] = "multipart/form-data";
     try {
-      var response = await Dio().post(baseUrl + "users/login", data: formData);
-      print(response.data);
-      if (response.statusCode == 200)
-        return response.data;
-      else
-        print("sadbajd");
+      var response = await dio.post(baseUrl + "applicants", data: formData);
+      return response;
     } on DioError catch (e) {
-      print(e.response);
-      return e;
+      return e.response;
     }
   }
 
@@ -73,7 +91,6 @@ class ApiService {
     };
     try {
       var response = await Dio().post(baseUrl + "users/register", data: data);
-      print("///////////////////");
       print(response.statusCode);
       if (response.statusCode == 201) {
         print(response.statusCode);
@@ -86,33 +103,26 @@ class ApiService {
   }
 
   Future getApplicantList() async {
+    Dio dio = Dio();
     var token = await Utils.getToken();
-    Dio().options.headers = {'authorization': 'Bearer+$token'};
+    dio.options.headers["authorization"] = "Bearer ${token}";
     try {
-      var response = await Dio().get(baseUrl + "applicants");
-      print(response.data);
-      if (response.statusCode == 200)
-        return response.data;
-      else
-        print("sadbajd");
+      var response = await dio.get(baseUrl + "applicants");
+      return response.data['data']['applicantList'];
     } on DioError catch (e) {
-      print(e.response);
       return e;
     }
   }
 
   Future getAnApplicant(id) async {
+    Dio dio = Dio();
     var token = await Utils.getToken();
-    Dio().options.headers = {'authorization': 'Bearer+$token'};
+    dio.options.headers["authorization"] = "Bearer ${token}";
     try {
-      var response = await Dio().get(baseUrl + "applicants/$id");
+      var response = await dio.get(baseUrl + "applicants/$id");
       print(response.data);
-      if (response.statusCode == 200)
-        return response.data;
-      else
-        print("sadbajd");
+      return response.data['data']['data'];
     } on DioError catch (e) {
-      print(e.response);
       return e;
     }
   }

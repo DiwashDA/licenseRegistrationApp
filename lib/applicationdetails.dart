@@ -1,15 +1,28 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:license_online/api/service.dart';
+import 'package:license_online/applicant.dart';
 import 'package:license_online/utils.dart';
 
 class Details extends StatefulWidget {
-  const Details({Key key}) : super(key: key);
-
+  const Details({Key key,this.id}) : super(key: key);
+final id;
   @override
   _DetailsState createState() => _DetailsState();
 }
 
+
 class _DetailsState extends State<Details> {
+  @override
+Applicant applicant;
+  void initState() {
+    ApiService().getAnApplicant(widget.id).then((value) {
+      applicant = Applicant.fromJson(value);
+      print(applicant.applicantName);
+    });
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(

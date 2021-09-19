@@ -42,7 +42,7 @@ class _RegisterPageState extends State<RegisterPage> {
             offset: dateController.text.length,
             affinity: TextAffinity.upstream));
       setState(() {
-        dobs.text = _selectedDate.year.toString()+"/"+_selectedDate.month.toString()+"/"+_selectedDate.day.toString();
+        dobs.text = _selectedDate.year.toString()+"-"+_selectedDate.month.toString()+"-"+_selectedDate.day.toString();
       });
     }
   }

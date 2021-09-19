@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:license_online/api/service.dart';
+import 'package:license_online/applicant.dart';
 import 'package:license_online/infoPage.dart';
 import 'package:license_online/selectApplicant.dart';
 import 'package:license_online/settingPage.dart';
@@ -23,6 +25,10 @@ class _IndexPageState extends State<IndexPage> {
     setState(() {
       _selectedIndex = index;
     });
+  }
+  @override
+  void initState() {
+    super.initState();
   }
 
   @override

@@ -15,7 +15,9 @@ class Utils {
   }
   static saveToken(value)async{
     SharedPreferences pref = await SharedPreferences.getInstance();
-    pref.setString("token", value['token']);
+    print(value);
+    print(value.data["token"]);
+    pref.setString("token", value.data["token"]);
   }
   static Future getToken()async{
     SharedPreferences pref = await SharedPreferences.getInstance();
