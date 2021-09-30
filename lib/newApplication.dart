@@ -46,6 +46,8 @@ class _NewApplicationState extends State<NewApplication> {
   }
 
   File imageFile;
+  File front;
+  File back;
   TextEditingController fullname = TextEditingController();
   TextEditingController citizen = TextEditingController();
   TextEditingController citizend = TextEditingController();
@@ -58,7 +60,7 @@ class _NewApplicationState extends State<NewApplication> {
   TextEditingController email = TextEditingController();
   TextEditingController dob = TextEditingController();
   TextEditingController gender = TextEditingController();
-  TextEditingController image = TextEditingController();
+
   TextEditingController office = TextEditingController();
   TextEditingController category = TextEditingController();
   TextEditingController witnessname = TextEditingController();
@@ -89,18 +91,7 @@ class _NewApplicationState extends State<NewApplication> {
     );
   }
 
-  _getFromGallery() async {
-    PickedFile pickedFile = await ImagePicker().getImage(
-      source: ImageSource.gallery,
-      maxWidth: 1800,
-      maxHeight: 1800,
-    );
-    if (pickedFile != null) {
-      setState(() {
-        imageFile = File(pickedFile.path);
-      });
-    }
-  }
+
 
   Widget form() {
     return PageView(
@@ -168,13 +159,13 @@ class _NewApplicationState extends State<NewApplication> {
                     child: IconButton(
                       iconSize: 30.0,
                       icon: Icon(Icons.image_search),
-                      onPressed: _getFromGallery,
+                      onPressed: (){getFromGallery(imageFile);},
                     ),
                   ),
                   IconButton(
                     iconSize: 30.0,
                     icon: Icon(Icons.camera_alt_outlined),
-                    onPressed: _getFromCamera,
+                    onPressed: (){getFromCamera(imageFile);},
                   ),
                 ],
               ),
@@ -315,20 +306,20 @@ class _NewApplicationState extends State<NewApplication> {
                     child: IconButton(
                       iconSize: 30.0,
                       icon: Icon(Icons.image_search),
-                      onPressed: _getFromGallery,
+                      onPressed: (){getFromGallery(front);},
                     ),
                   ),
                   IconButton(
                     iconSize: 30.0,
                     icon: Icon(Icons.camera_alt_outlined),
-                    onPressed: _getFromCamera,
+                    onPressed: (){getFromCamera(front);},
                   ),
                 ],
               ),
             ),
           ),
         ),
-        imageFile == null
+        front == null
             ? Container(
                 color: Colors.grey.withOpacity(0.5),
                 height: 150,
@@ -344,7 +335,7 @@ class _NewApplicationState extends State<NewApplication> {
                     height: 200,
                     width: 200,
                     child: Image.file(
-                      imageFile,
+                      front,
                       fit: BoxFit.fill,
                     ))),
         Padding(
@@ -370,13 +361,13 @@ class _NewApplicationState extends State<NewApplication> {
                     child: IconButton(
                       iconSize: 30.0,
                       icon: Icon(Icons.image_search),
-                      onPressed: _getFromGallery,
+                      onPressed: (){getFromGallery(back);},
                     ),
                   ),
                   IconButton(
                     iconSize: 30.0,
                     icon: Icon(Icons.camera_alt_outlined),
-                    onPressed: _getFromCamera,
+                    onPressed: (){getFromCamera(back);},
                   ),
                 ],
               ),
@@ -690,8 +681,21 @@ class _NewApplicationState extends State<NewApplication> {
     );
   }
 
+   getFromGallery(image) async {
+    PickedFile pickedFile = await ImagePicker().getImage(
+      source: ImageSource.gallery,
+      maxWidth: 1800,
+      maxHeight: 1800,
+    );
+    if (pickedFile != null) {
+      setState(() {
+        image = File(pickedFile.path);
+        print(pickedFile.path.toString());
+      });
+    }
+  }
   /// Get from Camera
-  _getFromCamera() async {
+  getFromCamera(image) async {
     PickedFile pickedFile = await ImagePicker().getImage(
       source: ImageSource.camera,
       maxWidth: 1800,
@@ -699,7 +703,7 @@ class _NewApplicationState extends State<NewApplication> {
     );
     if (pickedFile != null) {
       setState(() {
-        imageFile = File(pickedFile.path);
+        image = File(pickedFile.path);
       });
     }
   }
