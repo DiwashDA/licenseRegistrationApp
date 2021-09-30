@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:license_online/api/service.dart';
 import 'package:license_online/loginPage.dart';
-import 'package:license_online/main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Utils {
@@ -105,7 +104,7 @@ class Utils {
         controller: controller,
         decoration: InputDecoration(
           filled: true,
-          fillColor: Colors.white.withOpacity(0.3),
+          fillColor: Colors.white.withOpacity(0.6),
           focusColor: Colors.black,
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(color: Colors.black, style: BorderStyle.solid),
@@ -116,7 +115,7 @@ class Utils {
             borderRadius: BorderRadius.circular(8.0),
           ),
           labelText: label,
-          labelStyle: TextStyle(color: Colors.white),
+          labelStyle: TextStyle(color: Colors.white,fontSize: 18),
           prefixIcon: icon,
         ),
         obscureText: obs,

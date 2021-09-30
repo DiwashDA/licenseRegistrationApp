@@ -4,7 +4,6 @@ import 'package:license_online/api/service.dart';
 import 'package:license_online/indexPage.dart';
 import 'package:license_online/registerPage.dart';
 import 'package:license_online/utils.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key key}) : super(key: key);

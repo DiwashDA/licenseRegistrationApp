@@ -54,6 +54,8 @@ class _NewApplicationState extends State<NewApplication> {
   }
 
   File imageFile;
+  File backSide;
+  File frontSide;
   TextEditingController fullname = TextEditingController();
   TextEditingController citizen = TextEditingController();
   TextEditingController citizend = TextEditingController();
@@ -97,7 +99,7 @@ class _NewApplicationState extends State<NewApplication> {
     );
   }
 
-  _getFromGallery() async {
+  Future _getFromGallery() async {
     PickedFile pickedFile = await ImagePicker().getImage(
       source: ImageSource.gallery,
       maxWidth: 1800,
@@ -105,7 +107,69 @@ class _NewApplicationState extends State<NewApplication> {
     );
     if (pickedFile != null) {
       setState(() {
+       imageFile = File(pickedFile.path);
+      });
+    }
+  }
+  Future _getFromCamera() async {
+    PickedFile pickedFile = await ImagePicker().getImage(
+      source: ImageSource.camera,
+      maxWidth: 1800,
+      maxHeight: 1800,
+    );
+    if (pickedFile != null) {
+      setState(() {
         imageFile = File(pickedFile.path);
+      });
+    }
+  }
+  Future _getFromGalleryfront() async {
+    PickedFile pickedFile = await ImagePicker().getImage(
+      source: ImageSource.gallery,
+      maxWidth: 1800,
+      maxHeight: 1800,
+    );
+    if (pickedFile != null) {
+      setState(() {
+        frontSide= File(pickedFile.path);
+      });
+    }
+  }
+  Future _getFromCamerafront() async {
+    PickedFile pickedFile = await ImagePicker().getImage(
+      source: ImageSource.camera,
+      maxWidth: 1800,
+      maxHeight: 1800,
+    );
+    if (pickedFile != null) {
+      setState(() {
+
+        frontSide= File(pickedFile.path);
+      });
+    }
+  }
+  Future _getFromGalleryback() async {
+    PickedFile pickedFile = await ImagePicker().getImage(
+      source: ImageSource.gallery,
+      maxWidth: 1800,
+      maxHeight: 1800,
+    );
+    if (pickedFile != null) {
+      setState(() {
+        backSide = File(pickedFile.path);
+      });
+    }
+  }
+  Future _getFromCameraback() async {
+    PickedFile pickedFile = await ImagePicker().getImage(
+      source: ImageSource.camera,
+      maxWidth: 1800,
+      maxHeight: 1800,
+    );
+    if (pickedFile != null) {
+      setState(() {
+
+        backSide= File(pickedFile.path);
       });
     }
   }
@@ -281,6 +345,7 @@ class _NewApplicationState extends State<NewApplication> {
               onChanged: (String value) async {
                 setState(() {
                   _newValue = value;
+                  gender.text=_newValue;
                 });
               }),
         ),
@@ -323,20 +388,22 @@ class _NewApplicationState extends State<NewApplication> {
                     child: IconButton(
                       iconSize: 30.0,
                       icon: Icon(Icons.image_search),
-                      onPressed: _getFromGallery,
+                      onPressed: _getFromGalleryfront,
                     ),
                   ),
                   IconButton(
                     iconSize: 30.0,
                     icon: Icon(Icons.camera_alt_outlined),
-                    onPressed: _getFromCamera,
+                    onPressed: (){
+                      _getFromCamerafront();
+                    },
                   ),
                 ],
               ),
             ),
           ),
         ),
-        imageFile == null
+        frontSide == null
             ? Container(
                 color: Colors.grey.withOpacity(0.5),
                 height: 150,
@@ -378,20 +445,21 @@ class _NewApplicationState extends State<NewApplication> {
                     child: IconButton(
                       iconSize: 30.0,
                       icon: Icon(Icons.image_search),
-                      onPressed: _getFromGallery,
+                      onPressed: _getFromGalleryback,
                     ),
                   ),
                   IconButton(
                     iconSize: 30.0,
                     icon: Icon(Icons.camera_alt_outlined),
-                    onPressed: _getFromCamera,
+                    onPressed:
+                      _getFromCameraback,
                   ),
                 ],
               ),
             ),
           ),
         ),
-        imageFile == null
+        backSide == null
             ? Container(
                 color: Colors.grey.withOpacity(0.5),
                 height: 150,
@@ -712,16 +780,5 @@ class _NewApplicationState extends State<NewApplication> {
   }
 
   /// Get from Camera
-  _getFromCamera() async {
-    PickedFile pickedFile = await ImagePicker().getImage(
-      source: ImageSource.camera,
-      maxWidth: 1800,
-      maxHeight: 1800,
-    );
-    if (pickedFile != null) {
-      setState(() {
-        imageFile = File(pickedFile.path);
-      });
-    }
-  }
+
 }

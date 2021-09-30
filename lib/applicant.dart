@@ -85,3 +85,51 @@ class AppliedBy {
     return data;
   }
 }
+class Registration {
+  String sId;
+  Applicant applicant;
+  String userName;
+  String registrationDate;
+  String examinationDate;
+  String createdAt;
+  String updatedAt;
+  int iV;
+
+  Registration(
+      {this.sId,
+        this.applicant,
+        this.userName,
+        this.registrationDate,
+        this.examinationDate,
+        this.createdAt,
+        this.updatedAt,
+        this.iV});
+
+  Registration.fromJson(Map<String, dynamic> json) {
+    sId = json['_id'];
+    applicant = json['applicant'] != null
+        ? new Applicant.fromJson(json['applicant'])
+        : null;
+    userName = json['userName'];
+    registrationDate = json['registrationDate'];
+    examinationDate = json['examinationDate'];
+    createdAt = json['createdAt'];
+    updatedAt = json['updatedAt'];
+    iV = json['__v'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['_id'] = this.sId;
+    if (this.applicant != null) {
+      data['applicant'] = this.applicant.toJson();
+    }
+    data['userName'] = this.userName;
+    data['registrationDate'] = this.registrationDate;
+    data['examinationDate'] = this.examinationDate;
+    data['createdAt'] = this.createdAt;
+    data['updatedAt'] = this.updatedAt;
+    data['__v'] = this.iV;
+    return data;
+  }
+}

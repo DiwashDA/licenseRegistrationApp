@@ -1,8 +1,9 @@
 import 'dart:io';
-
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:license_online/utils.dart';
+import 'package:path/path.dart' as p;
+import 'package:http_parser/http_parser.dart';
+
 
 class ApiService {
   String baseUrl = "https://licenseregistrationsystem.herokuapp.com/api/v1/";
@@ -28,13 +29,34 @@ class ApiService {
 
   Future changePassword(oldPass, newPass, confirmPass) async {
     var data = {};
+    var token = Utils.getToken();
+    Dio dio  =Dio();
+    dio.options.headers["authorization"] = "Bearer ${token}";
+
     try {
-      var response = await Dio().patch(baseUrl + "users/login", data: data);
+      var response = await dio.patch(baseUrl + "users/login", data: data);
       print(response.data);
       return response.data;
     } on DioError catch (e) {
       return e;
     }
+  }
+  Future getExamDate(id)async{
+    Dio dio = Dio();
+    var token = Utils.getToken();
+    dio.options.headers["authorization"] = "Bearer ${token}";
+    try {
+      var response = await dio.post(baseUrl + "licenseRegistrations/$id");
+      print(response.statusCode);
+      if (response.statusCode == 201) {
+        print(response.statusCode);
+        return response.statusCode;
+      }
+    } on DioError catch (e) {
+      print(e.response.data);
+      return e.response.data;
+    }
+
   }
 
   Future newApplication(
@@ -47,25 +69,24 @@ class ApiService {
       transportationOffice,
       licenseType) async {
     Dio dio = Dio();
-
-    //File _fileImage =File(applicantPhoto.path);
+    print(applicantPhoto.path);
+    var extension = p.extension(applicantPhoto.path);
+    extension=extension.replaceAll(".", "");
     var file = await MultipartFile.fromFile(
       applicantPhoto.path,
       filename: applicantPhoto.path.split('/').last,
+      contentType: MediaType("image","$extension")
     );
-    // var file =
-    //     await MultipartFile.fromFile(applicantPhoto.path, filename: filename);
-    var data = {
-      'applicantName': "$applicantName",
-      'applicantCitizenshipNumber': "$applicantCitizenshipNumber",
-      'applicantAddress': "applicantAddress",
-      'applicantDOB': "$applicantDOB",
-      'applicantGender': "$applicantGender",
-      'applicantPhoto': file,
-      'transportationOffice': "$transportationOffice",
-      'licenseType': "$licenseType"
-    };
-    FormData formData = new FormData.fromMap(data);
+    FormData formData = new FormData.fromMap({
+    'applicantName': "$applicantName",
+    'applicantCitizenshipNumber': "$applicantCitizenshipNumber",
+    'applicantAddress': "applicantAddress",
+    'applicantDOB': "$applicantDOB",
+    'applicantGender': "$applicantGender",
+    'transportationOffice': "transportationOffice",
+    'licenseType': "licenseType",
+     'applicantPhoto':file
+    });
     var token = await Utils.getToken();
     print(token);
     dio.options.headers["authorization"] = "Bearer ${token}";

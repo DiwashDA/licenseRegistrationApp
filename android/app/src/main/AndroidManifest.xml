@@ -2,6 +2,7 @@
     package="com.example.license_online">
    <application
         android:label="license_online"
+        android:usesCleartextTraffic="true"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
